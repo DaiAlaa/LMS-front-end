@@ -5,6 +5,9 @@ import store from "./store";
 
 Vue.config.productionTip = false;
 
+axios.defaults.baseURL = "http://localhost:7000/";
+Vue.prototype.$url = "http://localhost:7000/";
+
 new Vue({
   router,
   store,
