@@ -7,16 +7,23 @@
             <h1>SignUp With your Email</h1>
             <div class="row">
               <div class="col-md-6">
-                <input type="text" placeholder="First Name" required />
+                <input type="text" placeholder="First Name" v-model="FirstName" required />
               </div>
               <div class="col-md-6">
-                <input type="text" placeholder="Last Name" required />
+                <input type="text" placeholder="Last Name" v-model="LastName" required />
               </div>
             </div>
-            <input type="email" placeholder="Email" required />
+            <input type="email" placeholder="Email" v-model="email" required />
+            <br/>
+            <p v-if="invalid_email == true" class="invalid" id="invalid_email">
+              The email address you supplied is invalid.
+            </p>
             <input type="password" placeholder="Password" required />
+            <p v-if="short_password == true" class="invalid" id="short_password">
+              Your password is too short.
+            </p>
             <input type="text" placeholder="UserName" required />
-            <input type="date" placeholder="Month" required />
+            <input type="date" placeholder="birthdate" v-model="birthdate" required />
             <div class="row">
               <div class ="col-md-1">
             <input type="radio"  class="gender" value="Male" v-model="gender"/>
@@ -113,24 +120,6 @@ input {
 #signup-btn:hover {
   background-color: #0f1549;
 }
-// .gender {
-
-//   input {
-//     margin-top: 3px;
-//     border-radius: 2px;
-//     width: 15%;
-//     margin-bottom: 0px;
-//     padding: 0em;
-//   }
-//   label {
-//     color: #88898c;
-//     font-size: 0.9375em;
-//     // text-align: left;
-//     // padding-top: 16px;
-//     // margin-right: 20px;
-//     // padding-left: 5px;
-//   }
-// }
 label{
   margin-top:1em;
 }
@@ -156,6 +145,7 @@ h1 {
 }
 </style>
 <script>
+import { mapGetters } from "vuex";
 export default {
     name:"SignUp",
     components:{},
@@ -167,18 +157,74 @@ export default {
             password: "",
             username: "",
             gender: "",
-            birthday: "",
-            month: "0",
-            day: "",
-            year: "",
+            birthdate: "",
         }
 
     },
     methods: {
+      signUp(){
+        this.trigger_validation = true;
+        this.can_submit = true;
+        setTimeout(() => {
+        if (this.can_submit) {
+          let newuser = {
+            username: this.username,
+            password: this.password,
+            country: this.country,
+            email: this.email,
+            gender: this.gender,
+            birthday: this.birthdate,
+          };
+          this.$store.dispatch("Authorization/signUp", newuser);
+          // this.$router.replace("/EmailConfirmation");
+          // this.$router.replace("/");
+        } 
+        else return;
+      }, 200);
+      },
+      cannotSubmit() {
+      this.can_submit = false;
+    },
+    canSubmit() {
+      this.can_submit = this.can_submit && true;
+    },
 
     },
     computed:{
-
+      ...mapGetters({
+      isLoggedIn: "Authorization/GetStatus",
+    }),
+    invalid_email: function() {
+      if (this.trigger_validation) {
+        var to_check = this.email;
+        if ( this.email != "" && (to_check.indexOf("@") == -1 || to_check.indexOf("@") == to_check.length - 1 || to_check.indexOf(".com") == -1 || to_check.indexOf(".com") + 4 != to_check.length)) {
+            this.cannotSubmit();
+            return true;
+        } 
+        else {
+          this.canSubmit();
+          return false;
+        }
+      } 
+      else {
+        return false;
+      }
+    },
+    short_password: function () {
+        if (this.trigger_validation) {
+          if (this.password.length <= 7 && this.password != "") {
+            this.cannotSubmit();
+            return true;
+          } 
+          else {
+            this.canSubmit();
+            return false;
+          }
+        } 
+        else {
+          return false;
+        }
+      },
     }
 }
 </script>
