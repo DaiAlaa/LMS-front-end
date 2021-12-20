@@ -5,27 +5,41 @@
         <div class="col-md-6">
           <form class="signup-form">
             <h1>SignUp With your Email</h1>
+            <div class="row">
+              <div class="col-md-6">
+                <input type="text" placeholder="First Name" required />
+              </div>
+              <div class="col-md-6">
+                <input type="text" placeholder="Last Name" required />
+              </div>
+            </div>
             <input type="email" placeholder="Email" required />
             <input type="password" placeholder="Password" required />
             <input type="text" placeholder="UserName" required />
             <input type="date" placeholder="Month" required />
             <div class="row">
-              <div class ="col-md-3">
+              <div class ="col-md-1">
             <input type="radio"  class="gender" value="Male" v-model="gender"/>
               </div>
-              <div class ="col-md-3">
+              <div class ="col-md-1">
             <label for="Male" >Male</label>
             </div>
-            <div class ="col-md-3">
+            <div class ="col-md-1">
             <input type="radio" value="Female" v-model="gender" class="gender" />
             </div>
-            <div class ="col-md-3">
+            <div class ="col-md-1">
             <label for="Female" >Female</label>
             </div>
             </div>
             <button @click.prevent="signUp()" id="signup-btn" type="submit" testid="sign up button" class="costum-btn">
               SignUp
             </button>
+            <div>
+            Aleady have an account?
+            <router-link class="highlight" to="/LogIn" tag="p">
+              Log in
+            </router-link>
+          </div>
           </form>
         </div>
       </div>
@@ -35,8 +49,8 @@
 
 .parent{
   background-color:darkblue;
-  height: calc(100vh);
-  width: calc(100vw);
+  height:100%;
+  width: 100%;
 }
 input {
   height: 3em;
@@ -52,8 +66,6 @@ input {
 }
 .gender{
   height:1.5em;
-  padding:0;
-  display: inline;
 }
 .costum-btn {
   font-size: 14px;
@@ -101,23 +113,26 @@ input {
 #signup-btn:hover {
   background-color: #0f1549;
 }
-.gender {
+// .gender {
 
-  input {
-    margin-top: 3px;
-    border-radius: 2px;
-    width: 15%;
-    margin-bottom: 0px;
-    padding: 0em;
-  }
-  label {
-    color: #88898c;
-    font-size: 0.9375em;
-    // text-align: left;
-    // padding-top: 16px;
-    // margin-right: 20px;
-    // padding-left: 5px;
-  }
+//   input {
+//     margin-top: 3px;
+//     border-radius: 2px;
+//     width: 15%;
+//     margin-bottom: 0px;
+//     padding: 0em;
+//   }
+//   label {
+//     color: #88898c;
+//     font-size: 0.9375em;
+//     // text-align: left;
+//     // padding-top: 16px;
+//     // margin-right: 20px;
+//     // padding-left: 5px;
+//   }
+// }
+label{
+  margin-top:1em;
 }
 .signup-form {
   background-color: white;
