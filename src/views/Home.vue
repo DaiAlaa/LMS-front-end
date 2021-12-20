@@ -4,11 +4,14 @@
     <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
   </div>
 </template>
-
+<style lang="scss" scoped>
+body{
+  background-color: red;
+}
+</style>
 <script>
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
-
 export default {
   name: "Home",
   // components: {
