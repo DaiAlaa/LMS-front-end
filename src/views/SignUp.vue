@@ -57,7 +57,8 @@
 .parent{
   background-color:darkblue;
   height:100%;
-  width: 100%;
+  width: 100vw;
+  // background: fixed;
 }
 input {
   height: 3em;

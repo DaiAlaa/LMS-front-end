@@ -3,8 +3,10 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import SignUp from "../views/SignUp.vue";
 import LogIn from "../views/LogIn.vue";
+import CourseHome from "../views/CourseHome.vue";
+import Embed from 'v-video-embed'
 Vue.use(VueRouter);
-
+Vue.use(Embed);
 const routes = [
   {
     path: "/",
@@ -21,6 +23,11 @@ const routes = [
     name: "LogIn",
     component: LogIn,
   }, 
+  {
+    path: "/CourseHome",
+    name: "CourseHome",
+    component: CourseHome,
+  },
 ];
 
 const router = new VueRouter({
