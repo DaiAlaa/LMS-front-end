@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <NavBar/>
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
@@ -72,13 +71,11 @@
 </style>
 <script>
 // @ is an alias to /src
-import NavBar from "@/components/NavBar.vue";
 import CourseCard from "@/components/CourseCard.vue";
 import { mapGetters } from "vuex";
 export default {
   name: "Home",
   components: {
-    NavBar,
     CourseCard
   },
   computed: {
