@@ -5,11 +5,15 @@ export default {
   namespaced: true,
   state: {
     Courses: [],
+    allUsers:[],
     
   },
   mutations: {
     setUserCourses(state, Courses) {
       state.Courses = Courses;
+    },
+    setAllUsers(state, Users){
+      state.allUsers =  Users;
     },
   },
   actions: {
@@ -29,10 +33,44 @@ export default {
           console.log(error);
         });
     },
+    addNewCourse({ commit }, course) {
+      axios
+      .post( urlRequest +  "courses/", {
+        course_name: course.course_name,
+        course_syllabus: course.course_syllabus,
+      })
+      .then((response) => {
+        ///////////////////response should return course id
+        let course_id = response.data;
+        // route to this new course page with the id
+        // commit("mutation name", par_name);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
+    showAllUsers({ commit }) {
+      axios
+        .get(urlRequest + "users/index")
+        .then((response) => {
+          let Users = response.data;
+          if (response.status != 200) {
+            Users = [];
+          }
+          commit("setAllUsers", Users);
+          console.log(response);
+        })
+        .catch((error) => {
+          let Users = [];
+          commit("setAllUsers", Users);
+          console.log(error);
+        });
+    },
     
    },
   getters: {
     Courses: state => state.Courses,
+    allUsers : state => state.allUsers,
     
   }
 };

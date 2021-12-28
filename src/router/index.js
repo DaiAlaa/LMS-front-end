@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import AddCourse from "../views/AddCourse";
+import AdminPanel from "../views/AdminPanel";
 import SignUp from "../views/SignUp.vue";
 import LogIn from "../views/LogIn.vue";
 Vue.use(VueRouter);
@@ -18,6 +19,11 @@ const routes = [
     name: "AddCourse",
     component: AddCourse,
   },
+  {
+    path: "/admin",
+    name: "AdminPanel",
+    component: AdminPanel,
+  }, 
   {
     path: "/SignUp",
     name: "SignUp",

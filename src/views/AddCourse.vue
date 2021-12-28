@@ -24,8 +24,10 @@
 
 .parent{
   background-color:darkblue;
-  height:100%;
-  width: 100vw;
+  height:100vh;
+  overflow: hidden;
+  padding-top: 7%;
+  // width: 100vw;
   // background: fixed;
 }
 input {
@@ -98,14 +100,8 @@ label{
   border:solid #1c1c1f;
   border-radius: 2em;
   border-color:gray ;
-  // background-size: cover;
-  // position: absolute;
-  // display: block;
-}
 
-// form {
-//   height: calc(120vh);
-// }
+}
 h1 {
   margin-top: 10%;
 }
@@ -114,7 +110,7 @@ h1 {
 }
 </style>
 <script>
-import { mapGetters } from "vuex";
+// import { mapGetters } from "vuex";
 export default {
     name:"AddCourse",
     components:{},
@@ -135,19 +131,17 @@ export default {
             course_name: this.course_name,
             course_syllabse: this.course_syllabse,
           };
-          this.$store.dispatch("Authorization/signUp", new_course);
+          this.$store.dispatch("Course/addNewCourse", new_course);
           // this.$router.replace("/EmailConfirmation");
           // this.$router.replace("/");
       }, 200);
       },
 
     },
-    computed:{
-      ...mapGetters({
-      isLoggedIn: "Authorization/GetStatus",
-    }),
-
-
-    }
+    // computed:{
+    //   ...mapGetters({
+    //   isLoggedIn: "Authorization/GetStatus",
+    // }),
+    // }
 }
 </script>
