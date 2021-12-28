@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <NavBar/>
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
@@ -56,10 +55,10 @@
   text-align: left;
 }
 .image{
-  width: 75%;
-  height: 75%;
+  width: 100%;
+  height: 85%;
   margin-left: 60%;
-  margin-top: 28%;
+  margin-top: 18%;
   float: right;
 }
 .freeCourse{
@@ -67,18 +66,16 @@
   text-align: left;
   font-size: 32px;
   font-weight: bold;
-  margin-top: 6%;
+  // margin-top: 3%;
 }
 </style>
 <script>
 // @ is an alias to /src
-import NavBar from "@/components/NavBar.vue";
 import CourseCard from "@/components/CourseCard.vue";
 import { mapGetters } from "vuex";
 export default {
   name: "Home",
   components: {
-    NavBar,
     CourseCard
   },
   computed: {

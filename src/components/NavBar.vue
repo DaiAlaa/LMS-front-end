@@ -34,6 +34,9 @@
       autocomplete="off"
       v-on:input="check(SearchValue)"
     />
+    <p class="logo">
+      dai
+    </p>
     </div>
 </template>
 <style lang="scss" scoped>
@@ -111,6 +114,15 @@
   text-decoration: none;
   outline: none;
   font-weight: bold;
+}
+.logo{
+  text-align: right;
+  color: white;
+  font-size: 30px;
+  display: inline;
+  position: absolute;
+  right: 95%;
+  margin-top:0.7% ;
 }
 </style>
 <script>
