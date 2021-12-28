@@ -2,11 +2,13 @@
     <div class="conatiner parent px-0">
         <br/>
         <p>
-            JavaScript
+            <!-- {{course.name}} -->
+            ML
         </p>
         <br/>
         <p>
-            JS
+            <!-- {{course.discribtion}} -->
+            Machine Learning
         </p>
         <br/>
         <p>
@@ -15,7 +17,7 @@
         </p>
         <br/>
         <br/>
-        <div>
+        <div class = "pdfs" >
             <!-- <ul>
                 <li v-for="item in items" :key="item.link">
                     {{item.link}}
@@ -23,11 +25,11 @@
             </ul> -->
         </div>
         <br/>
-        <div>
+        <div class= "videos">
             <!-- to but youtube videos  -->
         </div>
         <br/>
-        <div>
+        <div class = "questions">
             <!-- <ul>
                 <li v-for="question in questions" :key="question.content">
                     {{question.content}}
@@ -52,6 +54,7 @@
     }
 </style>
 <script>
+import { mapGetters } from "vuex";
 export default {
     name:"CourseHome",
     components:{},
@@ -61,7 +64,11 @@ export default {
         }
     },
     methods:{},
-    computed:{},
+    computed:{
+        ...mapGetters({
+      course: "Course/Course",
+    }),
+    },
 }
 
 </script>
