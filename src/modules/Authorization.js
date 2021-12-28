@@ -111,7 +111,6 @@ export default {
                 const user = response.data;
                 console.log("getuser: ",user);
                 commit("auth_success", { token, user });
-                // localStorage.setItem("is-admin", user.role);
                 if (flag) router.replace("/");
               })
               .catch(error => {
@@ -126,7 +125,7 @@ export default {
         GetStatus: (state) => state.status,
         User: (state) => state.User,
         UserID: (state) => state.User._id,
-        UserRole:(state)=>state.User.role,
+        UserType:(state)=>state.User.user_type,
         ResetMail:(state)=>state.Mail,
     }
 
