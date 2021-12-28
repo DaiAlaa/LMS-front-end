@@ -2,8 +2,10 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/addcourse">AddCourse</router-link>
     </div>
+    <!-- knows the route i opened in the broswer and get the matching template (content) -->
     <router-view />
   </div>
 </template>

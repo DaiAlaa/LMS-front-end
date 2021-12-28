@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import AddCourse from "../views/AddCourse";
 
 Vue.use(VueRouter);
 
@@ -10,7 +11,12 @@ const routes = [
     name: "Home",
     component: Home,
   },
-  
+
+  {
+    path: "/addcourse",
+    name: "AddCourse",
+    component: AddCourse,
+  },
 ];
 
 const router = new VueRouter({
