@@ -1,11 +1,13 @@
 import axios from "axios";
-import router from "../router/index";
+// import router from "../router/index";
+import store from "../store";
 var urlRequest = "https://thawing-reaches-29180.herokuapp.com/";
 export default {
   namespaced: true,
   state: {
     Courses: [],
     allUsers:[],
+    Course:{},
     
   },
   mutations: {
@@ -15,6 +17,9 @@ export default {
     setAllUsers(state, Users){
       state.allUsers =  Users;
     },
+    getCourse(state,Course){
+      state.Course=Course
+    }
   },
   actions: {
     showUserCourses({ commit }) {
@@ -33,7 +38,7 @@ export default {
           console.log(error);
         });
     },
-    addNewCourse({ commit }, course) {
+    addNewCourse(course) {
       axios
       .post( urlRequest +  "courses/", {
         course_name: course.course_name,
@@ -42,6 +47,7 @@ export default {
       .then((response) => {
         ///////////////////response should return course id
         let course_id = response.data;
+        console.log(course_id)
         // route to this new course page with the id
         // commit("mutation name", par_name);
       })
@@ -49,7 +55,7 @@ export default {
         console.log(error);
       });
     },
-    addNewCourseActivities({ commit }, Activities) {
+    addNewCourseActivities(Activities) {
       axios
       .post( urlRequest +  "courses/activity", {
         course_pdf: Activities.course_pdf,
@@ -58,6 +64,7 @@ export default {
       .then((response) => {
         ///////////////////response should return course id
         let course_id = response.data;
+        console.log(course_id);
         // route to this new course page with the id
         // commit("mutation name", par_name);
       })
@@ -82,7 +89,7 @@ export default {
           console.log(error);
         });
     },
-    elevateLearner({commit}, userId) {
+    elevateLearner(userId) {
       axios
         .update(urlRequest + "Admin/elevate?userId=" + userId)
         .then(() => {
@@ -92,11 +99,24 @@ export default {
           console.log(error);
         });
     },
+    getCourse({commit}){
+      axios
+      .get(urlRequest + "")
+      .then((response) => {
+        let Course = response.data;
+        commit("getCourse", Course);
+      })
+      .catch((error) => {
+        let Course = {};
+        commit("getCourse", Course);
+        console.log(error);
+      });
+    }
     
    },
   getters: {
     Courses: state => state.Courses,
     allUsers : state => state.allUsers,
-    
+    Course:state=>state.Course,
   }
 };

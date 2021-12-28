@@ -1,7 +1,8 @@
 import axios from "axios";
 import store from "../store";
 import router from "../router/index";
-// var urlRequest = "https://electronic-store-back-end.herokuapp.com/";
+var urlRequest = "https://thawing-reaches-29180.herokuapp.com/";
+
 export default {
     namespaced: true,
     state: {
@@ -42,20 +43,31 @@ export default {
     },
     actions:{
         signUp({ commit }, user) {
+          console.log("signup:",user)
+          let x={
+            user_name: user.username,
+            email: user.email,
+            first_name:user.firstname,
+            last_name:user.lastname,
+            birth_date: user.birthday,
+            password: user.password,
+          }
+          console.log(x);
             commit("auth_request");
             axios
-              .post( urlRequest +  "auth/sign-up", {
+              .post( urlRequest + "users/sign-up",{
+                user_name: user.username,
                 email: user.email,
+                first_name:user.firstname,
+                last_name:user.lastname,
+                birth_date: user.birthday,
                 password: user.password,
-                name: user.username,
-                role: "Customer",
-                gender: user.gender,
-                country: user.country,
-                birthday: user.birthday,
               })
               .then((response) => {
+                console.log("ya rab")
                 ///////////////////
-                const token = response.data.access_token;
+                const token = response.data.token;
+                console.log(token)
                 localStorage.setItem("X-token", token);
                 localStorage.setItem("Authorization", token);
                 axios.defaults.headers.common["Authorization"] = token;
@@ -69,14 +81,16 @@ export default {
           },
           logIn({ commit }, user) {
             commit("auth_request");
+            console.log(user);
             axios
-              .post( urlRequest + "auth/login", {
+              .post( urlRequest + "users/login", {
                 email: user.email,
                 password: user.password,
               })
               .then((response) => {
-                const token = response.data.access_token;
+                const token = response.data.token;
                 localStorage.setItem("Authorization", token);
+                console.log("hehe",response.data)
                 axios.defaults.headers.common["Authorization"] = token;
                 store.dispatch("Authorization/get_user", true);
               })
@@ -84,6 +98,26 @@ export default {
                 console.log(error);
                 commit("auth_faild");
                 localStorage.removeItem("Authorization");
+              });
+          },
+          get_user({ commit }, flag) {
+            const token = localStorage.getItem("Authorization");
+            axios.defaults.headers.common["Authorization"] = "Bearer "+token;
+            console.log("getuser token:",axios.defaults.headers.common["Authorization"]);
+            commit("auth_request");
+            axios
+              .get(urlRequest + "users")
+              .then(response => {
+                const user = response.data;
+                console.log("getuser: ",user);
+                commit("auth_success", { token, user });
+                // localStorage.setItem("is-admin", user.role);
+                if (flag) router.replace("/");
+              })
+              .catch(error => {
+                commit("auth_error", "user_err");
+                localStorage.removeItem("Authorization");
+                console.log("error: ",error);
               });
           },
     },

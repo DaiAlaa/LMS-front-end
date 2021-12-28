@@ -7,10 +7,10 @@
             <h1>SignUp With your Email</h1>
             <div class="row">
               <div class="col-md-6">
-                <input type="text" placeholder="First Name" v-model="FirstName" required />
+                <input type="text" placeholder="First Name" v-model="firstName" required />
               </div>
               <div class="col-md-6">
-                <input type="text" placeholder="Last Name" v-model="LastName" required />
+                <input type="text" placeholder="Last Name" v-model="lastName" required />
               </div>
             </div>
             <input type="email" placeholder="Email" v-model="email" required />
@@ -18,11 +18,11 @@
             <p v-if="invalid_email == true" class="invalid" id="invalid_email">
               The email address you supplied is invalid.
             </p>
-            <input type="password" placeholder="Password" required />
+            <input type="password" v-model="password" placeholder="Password" required />
             <p v-if="short_password == true" class="invalid" id="short_password">
               Your password is too short.
             </p>
-            <input type="text" placeholder="UserName" required />
+            <input type="text" v-model="username" placeholder="UserName" required />
             <input type="date" placeholder="birthdate" v-model="birthdate" required />
             <div class="row">
               <div class ="col-md-1">
@@ -57,7 +57,8 @@
 .parent{
   background-color:darkblue;
   height:100%;
-  width: 100%;
+  width: 100vw;
+  // background: fixed;
 }
 input {
   height: 3em;
@@ -158,6 +159,8 @@ export default {
             username: "",
             gender: "",
             birthdate: "",
+            firstName:"",
+            lastName:"",
         }
 
     },
@@ -170,12 +173,15 @@ export default {
           let newuser = {
             username: this.username,
             password: this.password,
-            country: this.country,
             email: this.email,
             gender: this.gender,
             birthday: this.birthdate,
+            firstname:this.firstName,
+            lastname:this.lastName,
           };
+          console.log("html",newuser);
           this.$store.dispatch("Authorization/signUp", newuser);
+          
           // this.$router.replace("/EmailConfirmation");
           // this.$router.replace("/");
         } 

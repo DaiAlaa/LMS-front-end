@@ -6,7 +6,7 @@
           <form class="login-form">
             <h1>LogIn to your account</h1>
             <input type="email" placeholder="Email" v-model="email" required />
-            <input type="password" placeholder="Password" required />
+            <input type="password" placeholder="Password" v-model="password" required />
             <button @click.prevent="logIn()" id="signup-btn" type="submit" testid="sign up button" class="costum-btn">
               LogIn
             </button>
