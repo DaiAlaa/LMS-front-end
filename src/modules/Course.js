@@ -49,6 +49,22 @@ export default {
         console.log(error);
       });
     },
+    addNewCourseActivities({ commit }, Activities) {
+      axios
+      .post( urlRequest +  "courses/activity", {
+        course_pdf: Activities.course_pdf,
+        course_video: Activities.course_video,
+      })
+      .then((response) => {
+        ///////////////////response should return course id
+        let course_id = response.data;
+        // route to this new course page with the id
+        // commit("mutation name", par_name);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
     showAllUsers({ commit }) {
       axios
         .get(urlRequest + "users/index")
@@ -63,6 +79,16 @@ export default {
         .catch((error) => {
           let Users = [];
           commit("setAllUsers", Users);
+          console.log(error);
+        });
+    },
+    elevateLearner({commit}, userId) {
+      axios
+        .update(urlRequest + "Admin/elevate?userId=" + userId)
+        .then(() => {
+          store.dispatch("Course/showAllUsers"); 
+        })
+        .catch((error) => {
           console.log(error);
         });
     },

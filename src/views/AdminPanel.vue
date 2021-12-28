@@ -110,7 +110,7 @@ export default {
   methods: {
     elevateLearner(userId) {
         //call action of elevation (put)
-      //this.$store.dispatch("Users/DeleteUser", userId);
+      this.$store.dispatch("Course/elevateLearner", userId);
       console.log("usertd kkk " , userId)
     },
   },
