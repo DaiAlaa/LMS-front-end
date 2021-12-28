@@ -1,6 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import AddCourse from "../views/AddCourse";
+import AddActivity from "../views/AddActivity"
+import AdminPanel from "../views/AdminPanel";
 import SignUp from "../views/SignUp.vue";
 import LogIn from "../views/LogIn.vue";
 import CourseHome from "../views/CourseHome.vue";
@@ -25,6 +28,22 @@ const routes = [
       },
     ]
   },
+
+  {
+    path: "/addcourse",
+    name: "AddCourse",
+    component: AddCourse,
+  },
+  {
+    path: "/admin",
+    name: "AdminPanel",
+    component: AdminPanel,
+  }, 
+  {
+    path: "/addactivity",
+    name: "AddActivity",
+    component: AddActivity,
+  }, 
   {
     path: "/SignUp",
     name: "SignUp",
