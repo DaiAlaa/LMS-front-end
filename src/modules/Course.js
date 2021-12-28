@@ -99,9 +99,9 @@ export default {
           console.log(error);
         });
     },
-    getCourse({commit}){
+    getCourse({commit},course_id){
       axios
-      .get(urlRequest + "")
+      .get(urlRequest + "/courses/?id="+course_id)
       .then((response) => {
         let Course = response.data;
         commit("getCourse", Course);
