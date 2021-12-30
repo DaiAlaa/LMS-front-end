@@ -1,5 +1,15 @@
 <template>
   <div class="home">
+    <router-link to="/addcourse"  v-if="UserType == 'Admin' || UserType == 'Instructor'">
+      <button class="addCourse">Add Course
+        <i class="fa fa-plus"></i>
+      </button>
+    </router-link>
+    <router-link to="/admin" v-if="UserType == 'Admin'">
+      <button class="adminPanel">Admin Panel
+        <i class="fa fa-plus"></i>
+      </button>
+    </router-link>
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
@@ -12,18 +22,19 @@
           <img src="../assets/3.png" class="image"/>
         </div>
       </div>
-      <div class="row">
+      <div class="row" v-if="GetStatus == 'success'">
         <p class="freeCourse">Free Courses </p>
       </div>
-      <div class="row justify-content-center">
+      <div class="row justify-content-center" v-if="GetStatus == 'success'">
         <CourseCard
-          v-for="course in userCourses"
+          v-for="course in userCourses.data"
           :key="course.id"
-          :userID="course.user_id"
+          :courseid="course.id"
           :name="course.name"
-          :syllabus="course.syllabus"
-          :created_at="course.created_at"
-          :updated_at="course.updated_at"
+          :instructor_id="course.instructor_id"
+          :instructor_user_name="course.instructor_user_name"
+          :instructor_first_name="course.instructor_first_name"
+          :instructor_last_name="course.instructor_last_name"
         />
       </div> 
     </div>
@@ -68,6 +79,34 @@
   font-weight: bold;
   // margin-top: 3%;
 }
+.addCourse{
+  margin-top: 8%;
+  width:10%;
+  height: 38px;
+  border: none;
+  border-radius: 20px;
+  text-decoration: none;
+  outline: none;
+  background-color: darkmagenta;
+  color: white;
+  margin-right: 5%;
+  position: absolute;
+  margin-left: 38%;
+}
+.adminPanel{
+  margin-top: 12%;
+  width:10%;
+  height: 38px;
+  border: none;
+  border-radius: 20px;
+  text-decoration: none;
+  outline: none;
+  background-image: linear-gradient(to right, darkmagenta , rgb(255, 190, 220));;
+  color: white;
+  margin-right: 5%;
+  position: absolute;
+  margin-left: 38%;
+}
 </style>
 <script>
 // @ is an alias to /src
@@ -78,10 +117,15 @@ export default {
   components: {
     CourseCard
   },
+  mounted() {
+    this.$store.dispatch("Course/showUserCourses");
+  },
   computed: {
     ...mapGetters({
       //searchResults: "Course/searchResults",
       userCourses: "Course/Courses",
+      GetStatus: "Authorization/GetStatus",
+      UserType: "Authorization/UserType"
     }),
   },
 };

@@ -108,7 +108,7 @@ export default {
             axios
               .get(urlRequest + "users")
               .then(response => {
-                const user = response.data;
+                const user = response.data.data;
                 console.log("getuser: ",user);
                 commit("auth_success", { token, user });
                 if (flag) router.replace("/");
@@ -121,7 +121,7 @@ export default {
           },
     },
     getters:{
-        Username: (state) => state.User.name,
+        Username: (state) => state.User.user_name,
         GetStatus: (state) => state.status,
         User: (state) => state.User,
         UserID: (state) => state.User._id,

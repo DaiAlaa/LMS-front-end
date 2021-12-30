@@ -1,29 +1,24 @@
 <template>
     <div
     class="home-navbar"
-    :class="[
-      {
-        notScrolled: scrolling <= 20,
-        scrolled: scrolling > 20
-      }
-    ]"
+    
     id="navBar"
     >
-    <router-link to="/SignUp">
-      <button class="signup">SIGN UP</button>
+    <router-link to="/SignUp" v-if="GetStatus == '' || GetStatus == 'faild'">
+      <button class="signup" >SIGN UP</button>
     </router-link>
-    <router-link to="/Login">
+    <router-link to="/Login" v-if="GetStatus == '' || GetStatus == 'faild'">
       <button class="login">LOG IN</button>
     </router-link>
-    <!-- <router-link to="/">
+    <router-link to="/UserProfile" v-if="GetStatus == 'success'">
         <button class="userName">
-            DaiAlaa
+            {{Username}}
             <i class="fa fa-user me"></i>
         </button>
     </router-link>
-    <button class="signup">
+    <button class="signup" @click="logout()" v-if="GetStatus == 'success'">
         LOG OUT
-    </button> -->
+    </button>
     <button class="SearchButton" @click="Search()">Search
         <i class="fa fa-search"></i>
     </button>
@@ -45,7 +40,7 @@
   width: 100%;
   height: 70px;
   top: 0%;
-  z-index: 0;
+  z-index: 1000;
   background-color: darkblue;
 }
 .signup {
@@ -126,6 +121,7 @@
 }
 </style>
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "NavBar",
   data: function () {
@@ -135,28 +131,34 @@ export default {
     };
   },
   // methods: {
-  //   Search() {
-  //     if (this.SearchValue != "") {
-  //       this.$store.dispatch("Products/searchProducts", this.SearchValue);
-  //       setTimeout(() => {
-  //       if (this.searchResults.length == 0){
-  //         this.notFound = true;
-  //       } 
-  //       }, 200);
-  //     }
-  //   },
-  //   check(SearchValue) {
-  //     if (SearchValue == "")
-  //     {
-  //       this.searchResults.length = 0;
-  //       this.notFound = false;
-  //     }
-  //   },
-  //   computed: {
-  //   ...mapGetters({
-  //     searchResults: "Products/searchResults",
-  //   }),
+    // logout()
+    // {
+    //   this.$store.dispatch("Authorization/logout");
+    // }
+    // Search() {
+    //   if (this.SearchValue != "") {
+    //     this.$store.dispatch("Products/searchProducts", this.SearchValue);
+    //     setTimeout(() => {
+    //     if (this.searchResults.length == 0){
+    //       this.notFound = true;
+    //     } 
+    //     }, 200);
+    //   }
+    // },
+    // check(SearchValue) {
+    //   if (SearchValue == "")
+    //   {
+    //     this.searchResults.length = 0;
+    //     this.notFound = false;
+    //   }
+    // },
   // },
-  // }
+  computed: {
+    ...mapGetters({
+      //searchResults: "Products/searchResults",
+      GetStatus: "Authorization/GetStatus",
+      Username: "Authorization/Username"
+    }),
+  },
 }
 </script>
