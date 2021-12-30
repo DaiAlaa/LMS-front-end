@@ -66,7 +66,7 @@ export default {
               .then((response) => {
                 console.log("ya rab")
                 ///////////////////
-                const token = response.data.token;
+                const token = "Bearer "+response.data.token;
                 console.log(token)
                 localStorage.setItem("X-token", token);
                 localStorage.setItem("Authorization", token);
@@ -88,7 +88,7 @@ export default {
                 password: user.password,
               })
               .then((response) => {
-                const token = response.data.token;
+                const token = "Bearer "+response.data.token;
                 localStorage.setItem("Authorization", token);
                 console.log("hehe",response.data)
                 axios.defaults.headers.common["Authorization"] = token;
@@ -102,7 +102,7 @@ export default {
           },
           get_user({ commit }, flag) {
             const token = localStorage.getItem("Authorization");
-            axios.defaults.headers.common["Authorization"] = "Bearer "+token;
+            axios.defaults.headers.common["Authorization"] = token;
             console.log("getuser token:",axios.defaults.headers.common["Authorization"]);
             commit("auth_request");
             axios
