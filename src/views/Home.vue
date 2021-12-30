@@ -41,11 +41,9 @@
   </div>
 </template>
 <style lang="scss" scoped>
-// .container{
-//   display: flex;
-//   flex-wrap: wrap;
-// align-content: flex-start;
-// }
+.home{
+  padding-bottom: 50px;
+}
 .title {
   color: black;
   margin-top: 50%;
@@ -75,8 +73,9 @@
 .freeCourse{
   color: black;
   text-align: left;
-  font-size: 32px;
+  font-size: 34px;
   font-weight: bold;
+  font-family: cursive;
   // margin-top: 3%;
 }
 .addCourse{
