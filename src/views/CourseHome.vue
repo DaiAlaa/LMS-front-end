@@ -20,11 +20,15 @@
         <hr/>
         <div class = "row pdfs" >
             <h1>PDF Materials</h1>
-                <div v-if="coursePdfs.data.length!=0">
-                <a class="pp" v-for="pdf in coursePdfs.data" :key="pdf.material.id" :href="pdf.file">
-                    {{pdf.material.name}}
-                </a>
-                </div>
+                <!-- <div v-if="this.PdfLength"> -->
+                    <a class="pp" v-for="pdf in coursePdfs.data" :key="pdf.material.id" :href="pdf.file">
+                        {{pdf.material.name}}
+                    </a>
+                <!-- </div> -->
+                <!-- <div v-else>
+                <h4>There is no Pdfs added to this course yet!</h4>
+            </div> -->
+
             <router-link :to="{path: '/addactivity/'+this.course[0].id}">
                 <button v-if="this.UserType=='admin' || this.UserID==this.course[0].instructor_id">Add PDF</button>
             </router-link>
@@ -33,14 +37,17 @@
         <hr/>
         <div class= "videos">
             <h1>Course Videos</h1>
-            <div v-if="coursePdfs.data.length!=0">
+            <!-- <div v-if="this.VideoLength"> -->
                 <!-- it takes normal or embed url -->
             <video-embed   v-for="video in courseVideos" :key="video.id" :src="video.content" target="_blank">
                 <li  >
                     <!-- {{video.name}} -->
                 </li>
                 </video-embed>
-            </div>
+            <!-- </div> -->
+            <!-- <div v-else>
+                <h4>There is no videos added to this course yet!</h4>
+            </div> -->
                 <!-- another way display videos from youtube  it takes embed url only  -->
                 <!-- <iframe  width="420" height="315" src="https://www.youtube.com/embed/AAbUfZD_09s"></iframe> -->
                 <router-link :to="{path: '/addactivity/'+this.course[0].id}">
@@ -73,8 +80,8 @@
     .parent{
         background-color:white;
         height:100%;
-        width: 100vw;
-        overflow: hidden;
+        width: 100%;
+        overflow-x: hidden;
         // background: fixed;
     }
     .courseInfo{
@@ -170,7 +177,8 @@ export default {
     data:function(){
         return{
             newQuestion:"",
-            
+            PdfLength:0,
+            VideoLength:0,
         }
     },
     mounted(){
@@ -179,9 +187,12 @@ export default {
         this.$store.dispatch("Course/getCourseVideos", this.$route.params.CourseID);
         this.$store.dispatch("Course/getCoursePdfs", this.$route.params.CourseID);
         this.$store.dispatch("Course/getCourseQuestions", this.$route.params.CourseID);
-        console.log("in vue course:",this.course);
+        // console.log("in vue course:",this.coursePdfs.data.length);
+        this.PdfLength=this.coursePdfs.data.length;
+        this.VideoLength=this.courseVideos.data.length;
+        console.log("in vue PdfLength:",this.PdfLength);
         console.log("UserID",this.UserID);
-        
+
     },
     methods:{
         addQuestion(){
