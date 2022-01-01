@@ -123,6 +123,7 @@ export default {
             localStorage.removeItem("Authorization");
             delete axios.defaults.headers.common["Authorization"];
             commit("logout");
+            router.replace("/");
           },
     },
     getters:{
