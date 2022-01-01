@@ -4,14 +4,13 @@
     
     id="navBar"
     >
-    <router-link to="/SignUp">
+    <router-link to="/SignUp" v-if="GetStatus == '' || GetStatus == 'faild'">
       <button class="signup" >SIGN UP</button>
     </router-link>
-    <router-link to="/Login">
+    <router-link to="/Login" v-if="GetStatus == '' || GetStatus == 'faild'">
       <button class="login">LOG IN</button>
     </router-link>
-    <!-- v-if="GetStatus == '' || GetStatus == 'faild'"
-      <router-link to="/UserProfile" v-if="GetStatus == 'success'">
+    <router-link to="/UserProfile" v-if="GetStatus == 'success'">
         <button class="userName">
             {{Username}}
             <i class="fa fa-user me"></i>
@@ -19,7 +18,7 @@
     </router-link>
     <button class="signup" @click="logout()" v-if="GetStatus == 'success'">
         LOG OUT
-    </button> -->
+    </button>
     <button class="SearchButton" @click="Search()">Search
         <i class="fa fa-search"></i>
     </button>
@@ -30,9 +29,6 @@
       autocomplete="off"
       v-on:input="check(SearchValue)"
     />
-    <!-- <p class="logo">
-      dai
-    </p> -->
     <router-link to="/">
       <img class="logo" src="../assets/lo.png" alt="logo" />
     </router-link>
@@ -133,11 +129,11 @@ export default {
       notFound: false,
     };
   },
-  // methods: {
-    // logout()
-    // {
-    //   this.$store.dispatch("Authorization/logout");
-    // }
+  methods: {
+    logout()
+    {
+      this.$store.dispatch("Authorization/logout");
+    },
     // Search() {
     //   if (this.SearchValue != "") {
     //     this.$store.dispatch("Products/searchProducts", this.SearchValue);
@@ -155,7 +151,7 @@ export default {
     //     this.notFound = false;
     //   }
     // },
-  // },
+  },
   computed: {
     ...mapGetters({
       //searchResults: "Products/searchResults",

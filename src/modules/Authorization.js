@@ -119,6 +119,11 @@ export default {
                 console.log("error: ",error);
               });
           },
+          logout({ commit }) {
+            localStorage.removeItem("Authorization");
+            delete axios.defaults.headers.common["Authorization"];
+            commit("logout");
+          },
     },
     getters:{
         Username: (state) => state.User.user_name,
