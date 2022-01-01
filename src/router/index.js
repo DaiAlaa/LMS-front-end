@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import AddCourse from "../views/AddCourse";
 import AddActivity from "../views/AddActivity"
+import AddActivityVid from "../views/AddActivityVid"
 import AdminPanel from "../views/AdminPanel";
 import SignUp from "../views/SignUp.vue";
 import LogIn from "../views/LogIn.vue";
@@ -40,6 +41,11 @@ const routes = [
         path: "/addactivity/:CourseID",
         name: "AddActivity",
         component: AddActivity,
+      },
+      {
+        path: "/addactivityvid/:CourseID",
+        name: "AddActivityVid",
+        component: AddActivityVid,
       },
       {
         path: "/Question/:QuestionID",

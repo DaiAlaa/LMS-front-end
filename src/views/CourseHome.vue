@@ -43,7 +43,7 @@
             </div>
                 <!-- another way display videos from youtube  it takes embed url only  -->
                 <!-- <iframe  width="420" height="315" src="https://www.youtube.com/embed/AAbUfZD_09s"></iframe> -->
-                <router-link :to="{path: '/addactivity/'+this.course[0].id}">
+                <router-link :to="{path: '/addactivityvid/'+this.course[0].id}">
                     <button  v-if="this.UserType=='admin' || this.UserID==this.course[0].instructor_id">Add Video</button>
                 </router-link>
                 
