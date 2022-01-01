@@ -1,11 +1,11 @@
 <template>
   <div class="home">
-    <router-link to="/addcourse"  v-if="UserType == 'Admin' || UserType == 'Instructor'">
+    <router-link to="/addcourse"  v-if="UserType == 'admin' || UserType == 'instructor'">
       <button class="addCourse">Add Course
         <i class="fa fa-plus"></i>
       </button>
     </router-link>
-    <router-link to="/admin" v-if="UserType == 'Admin'">
+    <router-link to="/admin" v-if="UserType == 'admin'">
       <button class="adminPanel">Admin Panel
         <i class="fa fa-plus"></i>
       </button>
@@ -25,7 +25,7 @@
       <div class="row" v-if="GetStatus == 'success'">
         <p class="freeCourse">Free Courses </p>
       </div>
-      <div class="row justify-content-center" v-if="GetStatus == 'success'">
+      <div v-if="GetStatus == 'success'" class="row justify-content-center" >
         <CourseCard
           v-for="course in userCourses.data"
           :key="course.id"
