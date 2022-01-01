@@ -27,6 +27,7 @@
   height:100vh;
   overflow: hidden;
   padding-top: 7%;
+  // 
 }
 input {
   height: 3em;
@@ -37,7 +38,8 @@ input {
   width: 90%;
   align-items: center;
   display: block;
-  margin: 1em;
+  margin-left: 5%;
+  margin-bottom: 1em;
   // background-color: transparent;
 }
 
@@ -51,7 +53,9 @@ textarea{
   width: 90%;
   align-items: center;
   display: block;
-  margin: 1em;
+  margin-left: 5%;
+  margin-bottom: 1em;
+
   // background-color: transparent;
 }
 .gender{

@@ -247,6 +247,8 @@ export default {
       .then(()=>{
         console.log("hehehe");
         commit ("successfulAdditionFile");
+        router.replace("/CourseHome/"+Pdf.Id);
+
       })
       .catch((error)=>{
         console.log(error);
@@ -257,6 +259,7 @@ export default {
       .post(urlRequest+"materials?course_id="+Video.courseID+"&content="+Video.link+"&material_type=video&name="+Video.name)
       .then(()=>{
         commit ("successfulAdditionFile");
+        router.replace("/CourseHome/"+Video.courseID);
       })
       .catch((error)=>{
         console.log(error);

@@ -4,10 +4,10 @@
     <router-link to="/">
       <img class="logo" src="../assets/lo.png" alt="logo" />
     </router-link>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
+    <br v-if="$mq != 'mobile' && $mq != 'tablet' "/>
+    <br v-if="$mq != 'mobile' && $mq != 'tablet' "/>
+    <br v-if="$mq != 'mobile' && $mq != 'tablet' "/>
+    <br v-if="$mq != 'mobile' && $mq != 'tablet' "/>
       <h1 >Admin Panel</h1>
       <div class="row mainRow justify-content-center border-bottom"  v-if="$mq != 'mobile' && $mq != 'tablet' ">
           <div class="col">
@@ -184,15 +184,27 @@ h4 {
 
 
 }
+
 .logo{
   width: 12%;
   height:80px ;
-  // display: inline;
-  // position: absolute;
   float:left;
   margin-left:2em;
+margin-right: 0em;
+}
+
+@media screen and (max-width: 1024px)  {
+
+.logo{
+width: 50%;
+height: 50%;
+  float:none;
+  margin-left:auto;
+  margin-right: auto;
+}
 
 }
+
 </style>
 
 <script>
