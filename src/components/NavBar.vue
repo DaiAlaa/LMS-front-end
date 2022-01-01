@@ -4,13 +4,14 @@
     
     id="navBar"
     >
-    <router-link to="/SignUp" v-if="GetStatus == '' || GetStatus == 'faild'">
+    <router-link to="/SignUp">
       <button class="signup" >SIGN UP</button>
     </router-link>
-    <router-link to="/Login" v-if="GetStatus == '' || GetStatus == 'faild'">
+    <router-link to="/Login">
       <button class="login">LOG IN</button>
     </router-link>
-    <router-link to="/UserProfile" v-if="GetStatus == 'success'">
+    <!-- v-if="GetStatus == '' || GetStatus == 'faild'"
+      <router-link to="/UserProfile" v-if="GetStatus == 'success'">
         <button class="userName">
             {{Username}}
             <i class="fa fa-user me"></i>
@@ -18,7 +19,7 @@
     </router-link>
     <button class="signup" @click="logout()" v-if="GetStatus == 'success'">
         LOG OUT
-    </button>
+    </button> -->
     <button class="SearchButton" @click="Search()">Search
         <i class="fa fa-search"></i>
     </button>
