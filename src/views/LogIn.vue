@@ -29,6 +29,8 @@
     background-color:darkblue;
     height:100vh;
     width: 100%;
+    overflow-x: hidden;
+    // padding-bottom: 3em;
   }
   input {
   height: 3em;
@@ -39,7 +41,8 @@
   width: 90%;
   align-items: center;
   display: block;
-  margin: 1em;
+  margin-left: 5%;
+  margin-bottom: 1em;
   // background-color: transparent;
 }
 .costum-btn {

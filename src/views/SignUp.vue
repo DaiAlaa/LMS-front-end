@@ -57,8 +57,9 @@
 .parent{
   background-color:darkblue;
   height:100%;
-  width: 100vw;
-  overflow: hidden;
+  width: 100%;
+  overflow-x: hidden;
+  padding-bottom: 3em;
   // background: fixed;
 }
 input {
@@ -70,11 +71,14 @@ input {
   width: 90%;
   align-items: center;
   display: block;
-  margin: 1em;
+  margin-left: 5%;
+  margin-bottom: 1em;
   // background-color: transparent;
 }
 .gender{
   height:1.5em;
+  left: 40%;
+  margin: 1em;
 }
 .costum-btn {
   font-size: 14px;
