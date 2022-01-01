@@ -7,7 +7,7 @@
             <h1>Add New Course</h1>
 
             <input type="text" placeholder="Type Course Name .." v-model="course_name" required />
-            <input type="text" placeholder="Type Course Syllabus .." v-model="course_syllabse" required />
+            <textarea type="text" placeholder="Type Course Syllabus .." v-model="course_syllabse" required></textarea>
             <!-- <p v-if="invalid_email == true" class="invalid" id="invalid_email">
               The email address you supplied is invalid.
             </p> -->
@@ -27,11 +27,23 @@
   height:100vh;
   overflow: hidden;
   padding-top: 7%;
-  // width: 100vw;
-  // background: fixed;
 }
 input {
   height: 3em;
+  padding: 0.625em 0.625em 0.625em;
+  border-radius: 2px;
+  border: 1px solid #dfe0e6;
+  color: #1c1c1f;
+  width: 90%;
+  align-items: center;
+  display: block;
+  margin: 1em;
+  // background-color: transparent;
+}
+
+textarea{
+
+  height: 8em;
   padding: 0.625em 0.625em 0.625em;
   border-radius: 2px;
   border: 1px solid #dfe0e6;
@@ -62,13 +74,11 @@ input {
   transition-duration: 0.3s;
   border-width: 0;
   letter-spacing: 2px;
-  /* min-width: 160px; */
   text-transform: uppercase;
   white-space: normal;
   float: center;
 }
-  // -webkit-appearance: none;
-  // -moz-appearance: none;
+
 .highlight {
   color: #0f1549;
   display: inline-block;
@@ -96,7 +106,7 @@ label{
 }
 .signup-form {
   background-color: white;
-  margin-top: 2em;
+  margin-top: calc(100vh/30);
   border:solid #1c1c1f;
   border-radius: 2em;
   border-color:gray ;
@@ -107,6 +117,13 @@ h1 {
 }
 .start{
   margin-top:5% ;
+}
+
+@media screen and (max-width: 600px) {
+ .signup-form {
+  margin-left: 2%;
+  margin-right: 2%;
+}
 }
 </style>
 <script>
@@ -126,15 +143,15 @@ export default {
       addCourse(){
         // this.trigger_validation = true;
         // this.can_submit = true;
-        setTimeout(() => {
-          let new_course = { //ceate new course obj
+            let new_course = { //ceate new course obj
             course_name: this.course_name,
             course_syllabse: this.course_syllabse,
           };
+          console.log(new_course);
           this.$store.dispatch("Course/addNewCourse", new_course);
-          // this.$router.replace("/EmailConfirmation");
+
           // this.$router.replace("/");
-      }, 200);
+          // this.$router.replace("/");
       },
 
     },
