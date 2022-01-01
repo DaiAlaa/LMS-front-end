@@ -86,7 +86,7 @@
   border-radius: 20px;
   text-decoration: none;
   outline: none;
-  background-color: darkmagenta;
+  background-image: linear-gradient(to right, darkmagenta , rgb(255, 190, 220));
   color: white;
   margin-right: 5%;
   position: absolute;
@@ -100,7 +100,7 @@
   border-radius: 20px;
   text-decoration: none;
   outline: none;
-  background-image: linear-gradient(to right, darkmagenta , rgb(255, 190, 220));;
+  background-image: linear-gradient(to right, darkmagenta , rgb(255, 190, 220));
   color: white;
   margin-right: 5%;
   position: absolute;

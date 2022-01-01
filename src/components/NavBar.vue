@@ -12,7 +12,7 @@
     </router-link>
     <router-link to="/UserProfile" v-if="GetStatus == 'success'">
         <button class="userName">
-            {{Username}}
+            {{Username|shorten}}
             <i class="fa fa-user me"></i>
         </button>
     </router-link>
@@ -158,6 +158,12 @@ export default {
       GetStatus: "Authorization/GetStatus",
       Username: "Authorization/Username"
     }),
+  },
+  filters: {
+    shorten: function (value) {
+      if (value && value.length > 7) return value.substring(0, 7) + "..";
+      else return value;
+    },
   },
 }
 </script>

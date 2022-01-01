@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from "../router";
 // import router from "../router/index";
 import store from "../store";
 var urlRequest = "https://thawing-reaches-29180.herokuapp.com/";
@@ -13,6 +14,8 @@ export default {
     Questions:[],
     Question:{},
     QuestionOwner:"",
+    new_course_id:"",
+    
   },
   mutations: {
     setUserCourses(state, Courses) {
@@ -45,7 +48,9 @@ export default {
     successfulAdditionFile(){
 
     },
-
+    setNewCourseID(state,cid){
+      state.new_course_id = cid;
+    },
   },
   actions: {
     showUserCourses({ commit }) {
@@ -64,20 +69,22 @@ export default {
           console.log(error);
         });
     },
-    addNewCourse(course) {
+    addNewCourse({commit},courseobj) {
       axios
       .post( urlRequest +  "courses/", {
-        course_name: course.course_name,
-        course_syllabus: course.course_syllabus,
+        name: courseobj.course_name,
+        syllabus: courseobj.course_syllabse,
       })
       .then((response) => {
         ///////////////////response should return course id
-        let course_id = response.data;
-        console.log(course_id)
-        // route to this new course page with the id
-        // commit("mutation name", par_name);
+        let course_data = response.data.data;
+        console.log("ha",response);
+        console.log("in r course:",course_data);        // route to this new course page with the id
+        commit("setNewCourseID", course_data.id);
+        router.replace("/CourseHome/"+course_data.id);
       })
       .catch((error) => {
+        console.log("ha2")
         console.log(error);
       });
     },
@@ -290,7 +297,6 @@ export default {
    },
   getters: {
     Courses: state => state.Courses,
-    allUsers : state => state.allUsers,
     Course:state=>state.Course,
     courseID:state=>state.Course.id,
     courseName:state=>state.courseName,

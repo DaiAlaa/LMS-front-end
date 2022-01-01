@@ -20,29 +20,33 @@
         <hr/>
         <div class = "row pdfs" >
             <h1>PDF Materials</h1>
+                <div v-if="coursePdfs.data.length!=0">
                 <a class="pp" v-for="pdf in coursePdfs.data" :key="pdf.material.id" :href="pdf.file">
                     {{pdf.material.name}}
                 </a>
+                </div>
             <router-link :to="{path: '/addactivity/'+this.course[0].id}">
-                <button >Add PDF</button>
+                <button v-if="this.UserType=='admin' || this.UserID==this.course[0].instructor_id">Add PDF</button>
             </router-link>
+                
         </div>
         <hr/>
         <div class= "videos">
             <h1>Course Videos</h1>
-            <ul>
+            <div v-if="coursePdfs.data.length!=0">
                 <!-- it takes normal or embed url -->
             <video-embed   v-for="video in courseVideos" :key="video.id" :src="video.content" target="_blank">
                 <li  >
                     <!-- {{video.name}} -->
                 </li>
                 </video-embed>
-                </ul>
+            </div>
                 <!-- another way display videos from youtube  it takes embed url only  -->
                 <!-- <iframe  width="420" height="315" src="https://www.youtube.com/embed/AAbUfZD_09s"></iframe> -->
                 <router-link :to="{path: '/addactivity/'+this.course[0].id}">
                     <button  v-if="this.UserType=='admin' || this.UserID==this.course[0].instructor_id">Add Video</button>
                 </router-link>
+                
         </div>
         <hr/>
         <div class = "questions">
