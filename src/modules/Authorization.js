@@ -130,7 +130,7 @@ export default {
         Username: (state) => state.User.user_name,
         GetStatus: (state) => state.status,
         User: (state) => state.User,
-        UserID: (state) => state.User._id,
+        UserID: (state) => state.User.id,
         UserType:(state)=>state.User.user_type,
         ResetMail:(state)=>state.Mail,
     }

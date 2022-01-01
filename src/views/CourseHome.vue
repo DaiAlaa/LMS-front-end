@@ -179,7 +179,9 @@ export default {
         this.$store.dispatch("Course/getCourseVideos", this.$route.params.CourseID);
         this.$store.dispatch("Course/getCoursePdfs", this.$route.params.CourseID);
         this.$store.dispatch("Course/getCourseQuestions", this.$route.params.CourseID);
-        console.log("in vue:",this.courseVideos.data[0]);
+        console.log("in vue course:",this.course);
+        console.log("UserID",this.UserID);
+        
     },
     methods:{
         addQuestion(){
