@@ -43,6 +43,7 @@
         background-color:darkblue;
         height:100%;
         width: 100vw;
+        overflow: hidden;
         // background: fixed;
     }
     

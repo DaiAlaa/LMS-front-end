@@ -6,11 +6,11 @@
                     <img src="../assets/u2.png" class="image"/>
                 </div>
                 <div class="col-sm-8">
-                    <p class="userName">Dai Alaa</p>
-                    <p class="mail">daialaa@gmail.com</p>
-                    <p class="type">instructor</p>
+                    <p class="userName">{{User.user_name}}</p>
+                    <p class="mail">{{User.email}}</p>
+                    <p class="type">{{this.role}}</p>
                     <p class="birth">Birth Date: 
-                        <span>1-1-2000</span>
+                        <span>{{User.birth_date}}</span>
                     </p>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                 />
                 <p class="success" v-if="Status == 'success' && this.fail == 0">Done Successfully</p>
                 <p class="failed" v-if="Status == 'failed' || this.fail == 1">Failed</p>
-                <button class="editBtn">Submit</button>
+                <button class="editBtn" @click="editUser()">Submit</button>
             </div>
         </div>
     </div>
@@ -184,6 +184,7 @@ export default {
       BirthDate: "",
       submit: false,
       fail: 0,
+      role: "Learner"
     };
   },
   methods: {
@@ -195,13 +196,16 @@ export default {
     },
     reqEmail() {
       var to_check = this.Email;
+      console.log("check", this.Email)
       if (
-        this.Email == "" ||
-        to_check.indexOf("@") == -1 ||
-        to_check.indexOf("@") == to_check.length - 1 ||
-        to_check.indexOf(".com") == -1 ||
-        to_check.indexOf(".com") + 4 != to_check.length
+        this.Email == "" 
+        // ||
+        // to_check.indexOf("@") == -1 ||
+        // to_check.indexOf("@") == to_check.length - 1 ||
+        // to_check.indexOf(".com") == -1 ||
+        // to_check.indexOf(".com") + 4 != to_check.length
       ) {
+        console.log("to_check", to_check)
         this.cannotSubmit();
         console.log("reqEmail no");
         return true;
@@ -211,7 +215,8 @@ export default {
       }
     },
     shortPassword() {
-          if (this.password.length <= 7 && this.password != "") {
+      console.log("password")
+          if (/*this.password.length <= 7 && ! */this.password == "") {
             this.cannotSubmit();
             return true;
           } 
@@ -243,9 +248,22 @@ export default {
       }, 200);
     },
   },
+  mounted(){
+    if (this.User.user_type == "guest"){
+      this.role = "Learner";
+    }
+    else if (this.User.user_type == "instructor"){
+      this.role = "Instructor"
+    }
+    else if (this.User.user_type == "admin"){
+      this.role = "Admin"
+    }
+    
+  },
   computed: {
     ...mapGetters({
       Status: "User/Status",
+      User:"Authorization/User",
     }),
   },
 }
