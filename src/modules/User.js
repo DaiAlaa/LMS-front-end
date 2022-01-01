@@ -28,7 +28,7 @@ export default {
         .then((response) => {
         state.userRespons = response.data;
         commit("isEdited", "success");
-        store.dispatch("Authorization/get_user", true);
+        store.dispatch("Authorization/get_user", false);
         })
         .catch((error) => {
         commit("isEdited", "failed");
