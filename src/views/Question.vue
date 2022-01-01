@@ -53,6 +53,34 @@ p{
     text-align: left;
     margin-left:4em;
 }
+button {
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 500px;
+    padding: 16px 48px 18px;
+    margin-bottom: 14px;
+    margin-top: 31px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    border-width: 0;
+    letter-spacing: 2px;
+    /* min-width: 160px; */
+    text-transform: uppercase;
+    white-space: normal;
+    float: center;
+    background-color: #0f1549;
+    max-width: 320px;
+    width: 100%;
+}
+button:hover {
+  background-color: #1524af;
+}
 </style>
 <script>
 import { mapGetters } from "vuex";

@@ -10,38 +10,34 @@
       <h4 class="card-title" id="cardtitle">
         {{name}}
       </h4>
-      <hr />
+      <br />
       <p class="cardtext">
-        created at : {{created_at}}
+        {{ 'by : ' + instructor_first_name + ' ' + instructor_last_name}}
       </p>
-      <br/>
-      <p class="cardtext">
-        by :
-      </p>
-      <!-- <router-link
-        :to="{ path: '/Category/' + categoryId }"
+      <router-link
+        :to="{ path: '/CourseHome/' + courseid }"
         class="stretched-link"
         id="carglink"
-      ></router-link> -->
+      ></router-link>
     </div>
   </div>   
 </template>
 <style lang="scss" scoped>
 .card {
-  background: rgb(0, 0, 117);
+  background: rgb(184, 184, 253);
   width: 23%;
-  height: 350px;
+  height: 310px;
   margin-left: 17px;
   margin-top: 17px;
   margin-bottom: 17px;
 }
 #cardimg {
   width: 100%;
-  height: 60%;
+  height: 65%;
   margin-top: 18px;
 }
 h4 {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
   color: white;
   margin-bottom: 4px;
@@ -50,7 +46,7 @@ h4 {
 }
 p {
   font-size: 15px;
-  color: white;
+  color: darkblue;
   position: absolute;
 }
 </style>
@@ -58,19 +54,22 @@ p {
 export default {
   name: "CourseCard",
   props: {
-    userID: {
-      type: String,
-    },
     name: {
       type: String,
     },
-    syllabus: {
-      type: String,
+    courseid: {
+      type: Number,
     },
-    created_at: {
+    instructor_id: {
+      type: Number,
+    },
+    instructor_user_name: {
       type: String
     },
-    updated_at: {
+    instructor_first_name: {
+      type: String,
+    },
+    instructor_last_name: {
       type: String,
     }
   },   

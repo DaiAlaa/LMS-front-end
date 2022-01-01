@@ -81,16 +81,36 @@ export default {
         console.log(error);
       });
     },
-    addNewCourseActivities(Activities) {
+    addNewCourseFile(fileObj) {
+      axios
+      .post( urlRequest +  "materials/create-file", {
+        name: fileObj.course_pdf_name,
+        material_type: "file",
+
+     })
+      .then((response) => {
+        ///////////////////response should return course id
+        let course_data = response.data;
+        console.log(course_data);
+        // route to this new course page with the id
+        // commit("mutation name", par_name);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
+
+    addNewCourseVideo(videoObj) {
       axios
       .post( urlRequest +  "courses/activity", {
-        course_pdf: Activities.course_pdf,
-        course_video: Activities.course_video,
+        content: videoObj.course_video_link,
+        name: videoObj.course_video_name,
+        material_type: "video", //video or vedio?
       })
       .then((response) => {
         ///////////////////response should return course id
-        let course_id = response.data;
-        console.log(course_id);
+        let course_data = response.data;
+        console.log(course_data);
         // route to this new course page with the id
         // commit("mutation name", par_name);
       })

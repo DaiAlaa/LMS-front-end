@@ -4,16 +4,28 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
           <form class="signup-form">
-            <h1>Add Activity</h1>
-
-            <!-- <input type="file" placeholder="Select pdf .." accept="application/pdf"  @change="onPdfUpload" required/> -->
-            <input type="text" placeholder="Type video link .." v-model="course_video" required />
+            <h1>Add Files</h1>
+            <input type="text" placeholder="Type File Name .." v-model="course_pdf_name" required />
+            <input type="file" placeholder="Select pdf .." @change="onPdfUpload" accept="application/pdf" required/>
+            
             <!-- <p v-if="invalid_email == true" class="invalid" id="invalid_email">
               The email address you supplied is invalid.
             </p> -->
           
-            <button @click.prevent="addVideo()" id="signup-btn" type="submit" testid="sign up button" class="costum-btn">
-              Add
+            <button @click.prevent="addPdfs()" id="signup-btn" type="submit" testid="sign up button" class="costum-btn">
+              Add PDF
+            </button>
+
+            <h1>Add Videos</h1>
+            <input type="text" placeholder="Type video Name .." v-model="course_video_name" required />
+            <input type="text" placeholder="Type video link .." v-model="course_video_link" required />
+
+            <!-- <p v-if="invalid_email == true" class="invalid" id="invalid_email">
+              The email address you supplied is invalid.
+            </p> -->
+          
+            <button @click.prevent="addVideoLink()" id="signup-btn" type="submit" testid="sign up button" class="costum-btn">
+              Add Video
             </button>
           </form>
         </div>
@@ -25,8 +37,9 @@
 .parent{
   background-color:darkblue;
   height:100vh;
-  overflow: hidden;
-  padding-top: 7%;
+  overflow-x: hidden;
+  padding-top: 4%;
+  padding-bottom: 5%;
   // width: 100vw;
   // background: fixed;
 }
@@ -100,10 +113,12 @@ label{
   border:solid #1c1c1f;
   border-radius: 2em;
   border-color:gray ;
+  padding-top: 2%;
+  padding-bottom: 2%;
 
 }
 h1 {
-  margin-top: 10%;
+  margin-top: 3%;
 }
 .start{
   margin-top:5% ;
@@ -116,10 +131,9 @@ export default {
     components:{},
     data:function(){
         return{
-          course_pdf: "",
-          course_video: "",
-          pdfName:"Pdf",
-          videoName:"Video",
+          course_pdf_name: "",
+          course_video_link: "",
+          course_video_name: "",
           selectedPdf:null,
         }
 
@@ -128,14 +142,14 @@ export default {
       onPdfUpload(event){
       this.selectedPdf = event.target.files[0];
     },
-      addPdf(){
+      addPdfs(){
         // this.trigger_validation = true;
         // this.can_submit = true;
         console.log("act:",this.$route.params.CourseID);
         let Pdf={
             SelPdf:this.selectedPdf,
             Id:this.$route.params.CourseID,
-            name:this.pdfName
+            name:this.course_pdf_name
         }
         // setTimeout(() => {
         //   let new_course_activity = { //ceate new course activity obj
@@ -148,14 +162,14 @@ export default {
       // }, 200);
       this.$store.dispatch("Course/addCoursePdf",Pdf);
       },
-      addVideo(){
+      addVideoLink(){
         // this.trigger_validation = true;
         // this.can_submit = true;
         console.log("act:",this.$route.params.CourseID);
         let Video={
-            link:this.course_video,
+            link:this.course_video_link,
             courseID:this.$route.params.CourseID,
-            name:this.videoName
+            name:this.course_video_name
         }
         // setTimeout(() => {
         //   let new_course_activity = { //ceate new course activity obj

@@ -1,11 +1,12 @@
 import axios from "axios";
-import router from "../router/index";
+// import router from "../router/index";
+import store from "../store";
 var urlRequest = "https://thawing-reaches-29180.herokuapp.com/";
 export default {
   namespaced: true,
   state: {
     status: "",
-    
+    userRespons: {}
   },
   mutations: {
     isEdited(state, msg) {
@@ -14,8 +15,9 @@ export default {
   },
   actions: {
     EditUser({ commit, state }, user) {
+      console.log("edit")
         axios
-        .post(urlRequest + "users", {
+        .put(urlRequest + "users", {
           user_name: user.userName,
           email: user.email,
           first_name: user.firstName,
@@ -26,6 +28,7 @@ export default {
         .then((response) => {
         state.userRespons = response.data;
         commit("isEdited", "success");
+        store.dispatch("Authorization/get_user", false);
         })
         .catch((error) => {
         commit("isEdited", "failed");
