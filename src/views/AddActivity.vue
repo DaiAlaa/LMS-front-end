@@ -4,16 +4,28 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
           <form class="signup-form">
-            <h1>Add Activity</h1>
-
+            <h1>Add Files</h1>
+            <input type="text" placeholder="Type File Name .." v-model="course_pdf_name" required />
             <input type="file" placeholder="Select pdf .." accept="application/pdf" required/>
-            <input type="text" placeholder="Type video link .." v-model="course_video" required />
+            
             <!-- <p v-if="invalid_email == true" class="invalid" id="invalid_email">
               The email address you supplied is invalid.
             </p> -->
           
-            <button @click.prevent="addActivities()" id="signup-btn" type="submit" testid="sign up button" class="costum-btn">
-              Add
+            <button @click.prevent="addPdfs()" id="signup-btn" type="submit" testid="sign up button" class="costum-btn">
+              Add PDF
+            </button>
+
+            <h1>Add Videos</h1>
+            <input type="text" placeholder="Type video Name .." v-model="course_video_name" required />
+            <input type="text" placeholder="Type video link .." v-model="course_video_link" required />
+
+            <!-- <p v-if="invalid_email == true" class="invalid" id="invalid_email">
+              The email address you supplied is invalid.
+            </p> -->
+          
+            <button @click.prevent="addVideoLink()" id="signup-btn" type="submit" testid="sign up button" class="costum-btn">
+              Add Video
             </button>
           </form>
         </div>
@@ -25,8 +37,9 @@
 .parent{
   background-color:darkblue;
   height:100vh;
-  overflow: hidden;
-  padding-top: 7%;
+  overflow-x: hidden;
+  padding-top: 4%;
+  padding-bottom: 5%;
   // width: 100vw;
   // background: fixed;
 }
@@ -100,10 +113,12 @@ label{
   border:solid #1c1c1f;
   border-radius: 2em;
   border-color:gray ;
+  padding-top: 2%;
+  padding-bottom: 2%;
 
 }
 h1 {
-  margin-top: 10%;
+  margin-top: 3%;
 }
 .start{
   margin-top:5% ;
@@ -116,28 +131,44 @@ export default {
     components:{},
     data:function(){
         return{
-          course_pdf: "",
-          course_video: "",
+          course_pdf_name: "",
+          course_video_link: "",
+          course_video_name: "",
 
         }
 
     },
     methods: {
-      addActivities(){
+      addPdfs(){
         // this.trigger_validation = true;
         // this.can_submit = true;
         setTimeout(() => {
-          let new_course_activity = { //ceate new course activity obj
-            course_pdf: this.course_pdf,
-            course_video: this.course_video,
+          let new_course_File = { //ceate new course activity obj
+            course_pdf_name: this.course_pdf_name,
           };
-          this.$store.dispatch("Course/addNewCourseActivities", new_course_activity); //to be changed
+          this.$store.dispatch("Course/addNewCourseFile", new_course_File); //to be changed
+          // this.$router.replace("/EmailConfirmation");
+          // this.$router.replace("/");
+      }, 200);
+      },
+
+      addVideoLink(){
+        // this.trigger_validation = true;
+        // this.can_submit = true;
+        setTimeout(() => {
+          let new_course_Video = { //ceate new course activity obj
+            course_video_link: this.course_video_link,
+            course_video_name: this.course_video_name,
+          };
+          this.$store.dispatch("Course/addNewCourseVideo", new_course_Video); //to be changed
           // this.$router.replace("/EmailConfirmation");
           // this.$router.replace("/");
       }, 200);
       },
 
     },
+    //addVideoLink
+    
     // computed:{
     //   ...mapGetters({
     //   isLoggedIn: "Authorization/GetStatus",
