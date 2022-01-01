@@ -26,24 +26,36 @@ const routes = [
         path: "UserProfile",
         component: UserProfile,
       },
+      {
+        path: "/addcourse",
+        name: "AddCourse",
+        component: AddCourse,
+      },
+      {
+        path: "/CourseHome/:CourseID",
+        name: "CourseHome",
+        component: CourseHome,
+      },
+      {
+        path: "/addactivity/:CourseID",
+        name: "AddActivity",
+        component: AddActivity,
+      },
+      {
+        path: "/Question/:QuestionID",
+        name: "Question",
+        component: Question,
+      },
+      
     ]
   },
 
-  {
-    path: "/addcourse",
-    name: "AddCourse",
-    component: AddCourse,
-  },
+  
   {
     path: "/admin",
     name: "AdminPanel",
     component: AdminPanel,
-  }, 
-  {
-    path: "/addactivity",
-    name: "AddActivity",
-    component: AddActivity,
-  }, 
+  },  
   {
     path: "/SignUp",
     name: "SignUp",
@@ -54,16 +66,8 @@ const routes = [
     name: "LogIn",
     component: LogIn,
   }, 
-  {
-    path: "/CourseHome",
-    name: "CourseHome",
-    component: CourseHome,
-  },
-  {
-    path: "/Question",
-    name: "Question",
-    component: Question,
-  },
+  
+  
 ];
 
 const router = new VueRouter({

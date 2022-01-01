@@ -6,13 +6,13 @@
           <form class="signup-form">
             <h1>Add Activity</h1>
 
-            <input type="file" placeholder="Select pdf .." accept="application/pdf" required/>
+            <!-- <input type="file" placeholder="Select pdf .." accept="application/pdf"  @change="onPdfUpload" required/> -->
             <input type="text" placeholder="Type video link .." v-model="course_video" required />
             <!-- <p v-if="invalid_email == true" class="invalid" id="invalid_email">
               The email address you supplied is invalid.
             </p> -->
           
-            <button @click.prevent="addActivities()" id="signup-btn" type="submit" testid="sign up button" class="costum-btn">
+            <button @click.prevent="addVideo()" id="signup-btn" type="submit" testid="sign up button" class="costum-btn">
               Add
             </button>
           </form>
@@ -110,7 +110,7 @@ h1 {
 }
 </style>
 <script>
-// import { mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 export default {
     name:"AddActivity",
     components:{},
@@ -118,30 +118,63 @@ export default {
         return{
           course_pdf: "",
           course_video: "",
-
+          pdfName:"Pdf",
+          videoName:"Video",
+          selectedPdf:null,
         }
 
     },
     methods: {
-      addActivities(){
+      onPdfUpload(event){
+      this.selectedPdf = event.target.files[0];
+    },
+      addPdf(){
         // this.trigger_validation = true;
         // this.can_submit = true;
-        setTimeout(() => {
-          let new_course_activity = { //ceate new course activity obj
-            course_pdf: this.course_pdf,
-            course_video: this.course_video,
-          };
-          this.$store.dispatch("Course/addNewCourseActivities", new_course_activity); //to be changed
+        console.log("act:",this.$route.params.CourseID);
+        let Pdf={
+            SelPdf:this.selectedPdf,
+            Id:this.$route.params.CourseID,
+            name:this.pdfName
+        }
+        // setTimeout(() => {
+        //   let new_course_activity = { //ceate new course activity obj
+        //     course_pdf: this.course_pdf,
+        //     course_video: this.course_video,
+        //   };
+          // this.$store.dispatch("Course/addNewCourseActivities",Pdf); //to be changed
           // this.$router.replace("/EmailConfirmation");
           // this.$router.replace("/");
-      }, 200);
+      // }, 200);
+      this.$store.dispatch("Course/addCoursePdf",Pdf);
+      },
+      addVideo(){
+        // this.trigger_validation = true;
+        // this.can_submit = true;
+        console.log("act:",this.$route.params.CourseID);
+        let Video={
+            link:this.course_video,
+            courseID:this.$route.params.CourseID,
+            name:this.videoName
+        }
+        // setTimeout(() => {
+        //   let new_course_activity = { //ceate new course activity obj
+        //     course_pdf: this.course_pdf,
+        //     course_video: this.course_video,
+        //   };
+          // this.$store.dispatch("Course/addNewCourseActivities",Pdf); //to be changed
+          // this.$router.replace("/EmailConfirmation");
+          // this.$router.replace("/");
+      // }, 200);
+      this.$store.dispatch("Course/addCourseVideo",Video);
       },
 
     },
-    // computed:{
-    //   ...mapGetters({
-    //   isLoggedIn: "Authorization/GetStatus",
-    // }),
-    // }
+    computed:{
+      ...mapGetters({
+      isLoggedIn: "Authorization/GetStatus",
+      courseID:"Course/courseID",
+    }),
+    }
 }
 </script>
