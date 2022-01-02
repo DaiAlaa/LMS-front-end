@@ -6,12 +6,14 @@
           <form class="signup-form">
             <h1>Add Files</h1>
             <input type="text" placeholder="Type File Name .." v-model="course_pdf_name" required />
-            <input type="file" placeholder="Select pdf .." @change="onPdfUpload" accept="application/pdf" required/>
+            <p v-if="invalid_pdf_name == true" class="invalid" id="invalid_pdf_name">
+              This is a required field
+            </p>
             
-            <!-- <p v-if="invalid_email == true" class="invalid" id="invalid_email">
-              The email address you supplied is invalid.
-            </p> -->
-          
+            <input type="file" placeholder="Select pdf .." @change="onPdfUpload" accept="application/pdf" required/>
+            <p v-if="empty_pdf == true" class="invalid" id="empty_pdf">
+              Please choose a file
+            </p>
             <button @click.prevent="addPdfs()" id="signup-btn" type="submit" testid="sign up button" class="costum-btn">
               Add PDF
             </button>
@@ -40,7 +42,8 @@ input {
   width: 90%;
   align-items: center;
   display: block;
-  margin: 1em;
+  margin-left: 5%;
+  margin-bottom: 1em;
   // background-color: transparent;
 }
 .gender{
@@ -82,6 +85,10 @@ input {
 .invalid {
   color: #bd3200;
   text-align: left;
+  align-items: center;
+  display: block;
+  margin-left: 5%;
+  margin-bottom: 1em;
 }
 
 #signup-btn {
@@ -123,6 +130,9 @@ export default {
           course_video_link: "",
           course_video_name: "",
           selectedPdf:null,
+          invalid_pdf_name: false,
+          empty_pdf: false,
+
         }
 
     },
@@ -131,24 +141,31 @@ export default {
       this.selectedPdf = event.target.files[0];
     },
       addPdfs(){
-        // this.trigger_validation = true;
-        // this.can_submit = true;
+
+        if(this.course_pdf_name == "" || this.selectedPdf == null){
+          if(this.course_pdf_name == ""){
+          this.invalid_pdf_name = true;
+          }else{
+            this.invalid_pdf_name = false;
+          }
+
+          if(this.selectedPdf == null){
+            this.empty_pdf = true;
+          }else{
+            this.empty_pdf = false;
+          }
+        }
+        else{
+        this.invalid_pdf_name = false;
+        this.empty_pdf = false;
         console.log("act:",this.$route.params.CourseID);
         let Pdf={
             SelPdf:this.selectedPdf,
             Id:this.$route.params.CourseID,
             name:this.course_pdf_name
         }
-        // setTimeout(() => {
-        //   let new_course_activity = { //ceate new course activity obj
-        //     course_pdf: this.course_pdf,
-        //     course_video: this.course_video,
-        //   };
-          // this.$store.dispatch("Course/addNewCourseActivities",Pdf); //to be changed
-          // this.$router.replace("/EmailConfirmation");
-          // this.$router.replace("/");
-      // }, 200);
-      this.$store.dispatch("Course/addCoursePdf",Pdf);
+         this.$store.dispatch("Course/addCoursePdf",Pdf);
+        }
       },
 
     },
