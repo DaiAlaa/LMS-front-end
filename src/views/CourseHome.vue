@@ -32,6 +32,9 @@
                         </li>
                     </a>
                     </ul>
+                    <div class="noMaterials" v-if="!this.coursePdfs.data.length">
+                            there is no pdf materials to show yet !!    
+                    </div>
                 <!-- </div> -->
                 <!-- <div v-else>
                 <h4>There is no Pdfs added to this course yet!</h4>
@@ -45,6 +48,7 @@
         <hr/>
         <div class= "videos">
             <h1>Course Videos</h1>
+
             <!-- <div v-if="this.VideoLength"> -->
                 <!-- it takes normal or embed url -->
             <div v-for="video in courseVideos" :key="video.id">
@@ -53,6 +57,9 @@
                 <h5>
                     {{video.name}}
                 </h5> 
+             </div>
+             <div class="noMaterials" v-if="!this.courseVideos.length">
+                            there is no videos to show yet !!    
                 </div>
             <!-- </div> -->
             <!-- <div v-else>
@@ -219,6 +226,10 @@ span{
 h5{
     margin-bottom: 2%;
 }
+.noMaterials{
+    // font-weight: bold;
+    font-size: 25px;
+}
 </style>
 <script>
 import { mapGetters } from "vuex";
@@ -238,7 +249,7 @@ export default {
         this.$store.dispatch("Course/getCourseVideos", this.$route.params.CourseID);
         this.$store.dispatch("Course/getCoursePdfs", this.$route.params.CourseID);
         this.$store.dispatch("Course/getCourseQuestions", this.$route.params.CourseID);
-        // console.log("in vue course:",this.coursePdfs.data.length);
+        console.log("in vue course:",this.courseVideos.length);
         // this.PdfLength=this.coursePdfs.data.length;
         // this.VideoLength=this.courseVideos.data.length;
         console.log("in vue PdfLength:",this.PdfLength);
