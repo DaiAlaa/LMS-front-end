@@ -7,10 +7,14 @@
             <h1>Add New Course</h1>
 
             <input type="text" placeholder="Type Course Name .." v-model="course_name" required />
+            <p v-if="invalid_name == true" class="invalid" id="invalid_name">
+              This is a required field
+            </p>
+
             <textarea type="text" placeholder="Type Course Syllabus .." v-model="course_syllabse" required></textarea>
-            <!-- <p v-if="invalid_email == true" class="invalid" id="invalid_email">
-              The email address you supplied is invalid.
-            </p> -->
+            <p v-if="invalid_syll == true" class="invalid" id="invalid_syll">
+              This is a required field
+            </p>
           
             <button @click.prevent="addCourse()" id="signup-btn" type="submit" testid="sign up button" class="costum-btn">
               Add
@@ -95,6 +99,10 @@ textarea{
 .invalid {
   color: #bd3200;
   text-align: left;
+  align-items: center;
+  display: block;
+  margin-left: 5%;
+  margin-bottom: 1em;
 }
 
 #signup-btn {
@@ -139,23 +147,43 @@ export default {
         return{
           course_name: "",
           course_syllabse: "",
-
+          invalid_name: false,
+          invalid_syll: false,
         }
 
     },
     methods: {
       addCourse(){
-        // this.trigger_validation = true;
-        // this.can_submit = true;
-            let new_course = { //ceate new course obj
-            course_name: this.course_name,
-            course_syllabse: this.course_syllabse,
-          };
-          console.log(new_course);
-          this.$store.dispatch("Course/addNewCourse", new_course);
+            
+            if(this.course_name == "" || this.course_syllabse == ""){
+              if(this.course_name == ""){
+              this.invalid_name = true;
 
-          // this.$router.replace("/");
-          // this.$router.replace("/");
+              }else{
+              this.invalid_name = false;
+
+              }
+
+              if(this.course_syllabse == ""){
+                this.invalid_syll = true;
+
+              }else{
+                this.invalid_syll = false;
+              }
+              console.log("empty")
+            }
+            else{
+              this.invalid_name = false;
+              this.course_syll = false;
+              let new_course = { //ceate new course obj
+                  course_name: this.course_name,
+                  course_syllabse: this.course_syllabse,
+                };
+                console.log(new_course);
+                this.$store.dispatch("Course/addNewCourse", new_course);
+            }
+
+         
       },
 
     },
