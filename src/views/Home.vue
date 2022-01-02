@@ -7,7 +7,7 @@
     </router-link>
     <router-link to="/admin" v-if="UserType == 'admin'">
       <button class="adminPanel">Admin Panel
-        <i class="fa fa-plus"></i>
+        <i class="fa fa-user me"></i>
       </button>
     </router-link>
     <div class="container">
@@ -86,7 +86,7 @@
   border-radius: 20px;
   text-decoration: none;
   outline: none;
-  background-image: linear-gradient(to right, darkmagenta , rgb(255, 190, 220));
+  background-image: linear-gradient(to right, rgb(0, 0, 121) , rgb(255, 190, 220));
   color: white;
   margin-right: 5%;
   position: absolute;
@@ -100,7 +100,7 @@
   border-radius: 20px;
   text-decoration: none;
   outline: none;
-  background-image: linear-gradient(to right, darkmagenta , rgb(255, 190, 220));
+  background-image: linear-gradient(to right, rgb(0, 0, 121) , rgb(255, 190, 220));
   color: white;
   margin-right: 5%;
   position: absolute;
