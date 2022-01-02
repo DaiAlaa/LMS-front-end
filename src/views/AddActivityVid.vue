@@ -6,12 +6,16 @@
           <form class="signup-form">
             <h1>Add Videos</h1>
             <input type="text" placeholder="Type video Name .." v-model="course_video_name" required />
-            <input type="text" placeholder="Type video link .." v-model="course_video_link" required />
-
-            <!-- <p v-if="invalid_email == true" class="invalid" id="invalid_email">
-              The email address you supplied is invalid.
-            </p> -->
-          
+            <p v-if="invalid_video_name == true" class="invalid" id="invalid_video_name">
+              This is a required field
+            </p>            
+            <input type="text" placeholder="Paste video link .." v-model="course_video_link" required />
+            <p v-if="empty_video_link == true" class="invalid" id="empty_video_link">
+              This is a required field
+            </p>  
+            <p v-if="invalid_video_link == true" class="invalid" id="invalid_video_link">
+              Invalid link
+            </p>  
             <button @click.prevent="addVideoLink()" id="signup-btn" type="submit" testid="sign up button" class="costum-btn">
               Add Video
             </button>
@@ -40,7 +44,8 @@ input {
   width: 90%;
   align-items: center;
   display: block;
-  margin: 1em;
+  margin-left: 5%;
+  margin-bottom: 1em;
   // background-color: transparent;
 }
 .gender{
@@ -82,8 +87,11 @@ input {
 .invalid {
   color: #bd3200;
   text-align: left;
+  align-items: center;
+  display: block;
+  margin-left: 5%;
+  margin-bottom: 1em;
 }
-
 #signup-btn {
   background-color: #0f1549;
   max-width: 320px;
@@ -113,6 +121,7 @@ h1 {
 }
 </style>
 <script>
+/* eslint-disable */
 import { mapGetters } from "vuex";
 export default {
     name:"AddActivity",
@@ -123,29 +132,46 @@ export default {
           course_video_link: "",
           course_video_name: "",
           selectedPdf:null,
+          invalid_video_name: false,
+          empty_video_link: false,
+          invalid_video_link:false,
         }
 
     },
     methods: {
+      //^(https?\:\/\/)?(www\.youtube\.com|youtu\.be)\/.+$
       addVideoLink(){
-        // this.trigger_validation = true;
-        // this.can_submit = true;
+        var reg = new RegExp("^(https?\:\/\/)?(www\.youtube\.com|youtu\.be)\/.+$");
+         if(this.course_video_name == "" || this.course_video_link == "" || !reg.test(this.course_video_link)){
+          if(this.course_video_name == ""){
+          this.invalid_video_name = true;
+          }else{
+            this.invalid_video_name = false;
+          }
+          if(this.course_video_link == ""){
+            this.empty_video_link = true;
+          }else{
+            this.empty_video_link = false;
+          }
+
+          if(!reg.test(this.course_video_link) && !this.empty_video_link){
+            this.invalid_video_link = true;
+          }else{
+            this.invalid_video_link = false;
+          }
+        }
+        else{
+        this.invalid_video_link = false;
+        this.invalid_video_name = false;
+        this.empty_video_link = false
         console.log("act:",this.$route.params.CourseID);
         let Video={
             link:this.course_video_link,
             courseID:this.$route.params.CourseID,
             name:this.course_video_name
         }
-        // setTimeout(() => {
-        //   let new_course_activity = { //ceate new course activity obj
-        //     course_pdf: this.course_pdf,
-        //     course_video: this.course_video,
-        //   };
-          // this.$store.dispatch("Course/addNewCourseActivities",Pdf); //to be changed
-          // this.$router.replace("/EmailConfirmation");
-          // this.$router.replace("/");
-      // }, 200);
       this.$store.dispatch("Course/addCourseVideo",Video);
+        }
       },
 
     },
