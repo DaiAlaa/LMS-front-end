@@ -1,18 +1,19 @@
 <template>
     <div class="conatiner parent px-0">
         <div class= "courseInfo row" >
-            <div class="col-sm-3">
-                <h1>
-                    {{this.course[0].name}}
+            <div class="col-sm-5">
+                <h1 class="instructorName">
+                 <span > Course:</span>  {{this.course[0].name}}
                 </h1>
-                <p>
+                <h4>About this course:</h4>
+                <h4 class="syllabus">
                     {{this.course[0].syllabus}}
-                </p>
-                <h2>
-                    {{this.course[0].instructor_user_name}}
+                </h4>
+                <h2 class="instructorName">
+                 <span>by: </span> {{this.course[0].instructor_user_name}}
                 </h2> 
             </div>
-            <div class="col-sm-3"></div>
+            <div class="col-sm-1"></div>
             <div class="col-sm-6">
                 <img src="../assets/3.png" class="image"/>
             </div>
@@ -59,67 +60,69 @@
         <div class = "questions">
             <h1>Course Questions</h1>
             
-                <router-link class="question" v-for="question in courseQuestions.data" :key="question.id"  :to="{path: '/Question/'+question.id}">
+                <router-link class="routerQ" v-for="question in courseQuestions.data" :key="question.id"  :to="{path: '/Question/'+question.id}">
                     <div class="question" >
-                        <h4>                
+                        <h4 class="LearnersQuestion">                
                             {{question.content}}
                         </h4>
-                        <p>
-                           by: {{question.learner_user_name}}
+                        <p >
+                            by: {{question.learner_user_name}}
                         </p>
                     </div>
                 </router-link>
             
             <input type="text" v-model="newQuestion" placeholder="Add your Question ...."  class="Qs"/>
-            <button @click="addQuestion()"  type="submit" class="costum-btn">Submit</button>
+            <button :disabled="this.newQuestion==''" @click="addQuestion()"  type="submit" class="costum-btn">Submit</button>
         </div>
     </div>
 </template>
 <style lang="scss" scoped>
     
-    .parent{
-        background-color:white;
-        height:100%;
-        width: 100%;
-        overflow-x: hidden;
-        // background: fixed;
-    }
-    .courseInfo{
-        margin-top:5em;
-        margin-bottom: 0em;
-        // width: 100%;
-        // height: 100%;
-        // padding: 0%;
-    }
-    h1,h2,h4{
-       font-weight: bold;
-       font-family:"Times New Roman";
-       margin-left: 1em;
-       color:black;
-       
-    }
-    p{
-        color:black;
-        display: block;
-        // text-align: left;
-        margin-left: 2em;
-        text-decoration: none;
-        // outline: none;
-    }
-    hr{
-        color:darkblue;
-        font-weight: bold;
-        margin-right: 2em;
-        margin-left: 2em;
-        height:2em;
-    }
-    .image{
-    width: 50%;
-    height: 70%;
+.parent{
+    background-color:white;
+    height:100%;
+    width: 100%;
+    overflow-x: hidden;
+    // background: fixed;
+}
+.courseInfo{
+    margin-top:5em;
+    margin-bottom: 0em;
+    // width: 100%;
+    // height: 100%;
+    // padding: 0%;
+}
+h1,h2,h4{
+    font-weight: bold;
+    font-family:"Times New Roman";
+    // float:left;
+    // margin-left: 2em;
+    color:darkmagenta;
+    // display: block;
+    
+}
+p{
+    color:black;
+    display: block;
+    // text-align: left;
+    margin-left: 2em;
+    text-decoration: none;
+    // outline: none;
+}
+hr{
+    color:darkblue;
+    font-weight: bold;
+    margin-right: 2em;
+    margin-left: 2em;
+    height:2em;
+}
+.image{
+width: 50%;
+height: 70%;
 //   margin-left: 60%;
 //   margin-top: 18%;
 //   float: right;
-    padding: 0%;
+padding: 0%;
 }
 .pp{
     display: block;
@@ -132,8 +135,16 @@
 .question{
     border-style:outset ;
     border-radius: 2em;
-    text-decoration: none;
+    width:90%;
+    margin-left: 5%;
+    margin-top: 2em;
 }
+
+.routerQ{
+    text-decoration: none;
+    width:90%;
+    
+}  
 button,.costum-btn {
     font-size: 14px;
     line-height: 1;
@@ -141,8 +152,8 @@ button,.costum-btn {
     padding: 16px 48px 18px;
     margin-bottom: 14px;
     margin-top: 31px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 40%;
+    // margin-right: auto;
     color: #fff;
     text-decoration: none;
     font-weight: 700;
@@ -164,9 +175,30 @@ button:hover {
 }
 .Qs{
     height:4em;
-    border:solid #00008b;
+    // border:solid #00008b;
+    border-color: darkblue;
     border-radius: 2em;
-    width:100%;
+    width:90%;
+    margin-top:2em;
+    margin-left:5%;
+    padding: 2%;
+    // border:none;
+}
+.instructorName{
+    color:black;
+}
+span{
+    color: darkmagenta;
+}
+.syllabus{
+    color:black;
+    margin-left:40%;
+
+}
+.LearnersQuestion{
+    color: black;
+    margin-left: 2em;
+    margin-top: 2%;
 }
 </style>
 <script>
@@ -201,6 +233,7 @@ export default {
                 newQuestion:this.newQuestion
             }
             this.$store.dispatch("Course/addQuestion",Question);
+            this.newQuestion='';
         }
     },
     computed:{

@@ -28,7 +28,7 @@
         v-for="user in AllUsers.data"
         :key="user.id" 
       >
-         <div v-if="user.user_type=='guest' && $mq != 'mobile' && $mq != 'tablet' " class="row record border-bottom border-secondary"> 
+         <div v-if="(user.user_type=='guest'||user.user_type=='learner') && $mq != 'mobile' && $mq != 'tablet' " class="row record border-bottom border-secondary"> 
           <div class="col-md">
             <h4 class="head1">{{ user.user_name }}</h4>
           </div>
@@ -46,7 +46,7 @@
 
   <div v-if="$mq == 'mobile' || $mq == 'tablet'">
   <div v-for="user in AllUsers.data" :key="user.id"> 
-    <div  v-if="user.user_type=='guest'" class="card-container">
+    <div  v-if="user.user_type=='guest'||user.user_type=='learner'" class="card-container">
       <b> Name: </b> {{ user.user_name }} <br/>
       <b> Email: </b> {{ user.email }}<br/>
       <b> Role: </b> {{ user.user_type }}<br/>

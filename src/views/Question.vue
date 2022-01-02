@@ -18,7 +18,7 @@
                     </p>
                 </div>
         <input class="newAnswer" v-model="newAnswer" type="text" placeholder="Write your answer"/>
-        <button @click="addAnswer()">
+        <button :disabled="this.newAnswer==''" @click="addAnswer()">
             Submit
         </button>
     </div>
@@ -26,9 +26,12 @@
 <style lang="scss" scoped>
 .Q{
     margin-top:7em;
-    border:solid darkblue;
+    border:solid black;
     border-radius: 2em;
     margin-bottom:2em;
+    width:90%;
+    // margin-top:2em;
+    margin-left:5%;
     
 }
 .A{
@@ -38,12 +41,18 @@
     
     border:solid darkblue;
     border-radius: 2em;
+    width:90%;
+    margin-left:5%;
+    margin-bottom:2%;
 }
 .newAnswer{
     height:4em;
-    border:solid #00008b;
+    border:solid ;
     border-radius: 2em;
-    width:100%;
+     width:90%;
+    // margin-left:2%;
+    margin-bottom:2%;
+    padding-left: 1em;
 }
 h3{
     text-align: left;
