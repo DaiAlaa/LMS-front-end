@@ -26,12 +26,14 @@
 <style lang="scss" scoped>
 .Q{
     margin-top:7em;
-    border:solid black;
+    border:solid darkmagenta;
     border-radius: 2em;
     margin-bottom:2em;
     width:90%;
     // margin-top:2em;
     margin-left:5%;
+    color:black;
+    background-color:rgba(241, 235, 235, 0.712) ;
     
 }
 .A{
@@ -39,18 +41,18 @@
 }
 .Ans{
     
-    border:solid darkblue;
+    border:solid black;
     border-radius: 2em;
-    width:90%;
-    margin-left:5%;
+    width:85%;
+    margin-left:10%;
     margin-bottom:2%;
 }
 .newAnswer{
     height:4em;
     border:solid ;
     border-radius: 2em;
-     width:90%;
-    // margin-left:2%;
+     width:85%;
+    margin-left:5%;
     margin-bottom:2%;
     padding-left: 1em;
 }
@@ -112,6 +114,7 @@ export default {
                 newAnswer:this.newAnswer
             }
             this.$store.dispatch("Course/addAnswer", Answer);
+            this.newAnswer='';
         }
     },
     computed:{

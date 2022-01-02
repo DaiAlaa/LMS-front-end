@@ -1,6 +1,12 @@
 <template>
     <div class="conatiner parent px-0">
       <div class="row">
+        <br/>
+      <router-link to="/">
+        <img class="logo" src="../assets/lo.png" alt="logo" />
+      </router-link>
+      </div>
+      <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
           <form class="signup-form">
@@ -148,6 +154,13 @@ h1 {
 }
 .start{
   margin-top:5% ;
+}
+.logo{
+  width: 12%;
+  height:80px ;
+  float:left;
+  margin-left:2em;
+  margin-right: 0em;
 }
 </style>
 <script>

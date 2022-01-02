@@ -8,7 +8,7 @@
     />
     <div class="card-body" id="cardbody">
       <h4 class="card-title" id="cardtitle">
-        {{name}}
+        {{name|shorten}}
       </h4>
       <br />
       <p class="cardtext">
@@ -72,6 +72,12 @@ export default {
     instructor_last_name: {
       type: String,
     }
+  },
+  filters: {
+    shorten: function (value) {
+      if (value && value.length > 20) return value.substring(0, 20) + "..";
+      else return value;
+    },
   },   
 }
 </script>

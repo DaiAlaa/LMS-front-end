@@ -2,6 +2,9 @@
     <div class="conatiner parent px-0">
         <div class= "courseInfo row" >
             <div class="col-sm-5">
+                <br/><br/><br/>
+                <br/>
+                <br/>
                 <h1 class="instructorName">
                  <span > Course:</span>  {{this.course[0].name}}
                 </h1>
@@ -15,16 +18,20 @@
             </div>
             <div class="col-sm-1"></div>
             <div class="col-sm-6">
-                <img src="../assets/3.png" class="image"/>
+                <img src="../assets/course.png" class="image"/>
             </div>
         </div>
         <hr/>
         <div class = "row pdfs" >
             <h1>PDF Materials</h1>
                 <!-- <div v-if="this.PdfLength"> -->
+                    <ul>
                     <a class="pp" v-for="pdf in coursePdfs.data" :key="pdf.material.id" :href="pdf.file">
-                        {{pdf.material.name}}
+                        <li>
+                            {{pdf.material.name}}
+                        </li>
                     </a>
+                    </ul>
                 <!-- </div> -->
                 <!-- <div v-else>
                 <h4>There is no Pdfs added to this course yet!</h4>
@@ -40,11 +47,13 @@
             <h1>Course Videos</h1>
             <!-- <div v-if="this.VideoLength"> -->
                 <!-- it takes normal or embed url -->
-            <video-embed   v-for="video in courseVideos" :key="video.id" :src="video.content" target="_blank">
-                <li  >
-                    <!-- {{video.name}} -->
-                </li>
+            <div v-for="video in courseVideos" :key="video.id">
+                <video-embed    :src="video.content" target="_blank">    
                 </video-embed>
+                <h5>
+                    {{video.name}}
+                </h5> 
+                </div>
             <!-- </div> -->
             <!-- <div v-else>
                 <h4>There is no videos added to this course yet!</h4>
@@ -85,19 +94,19 @@
     overflow-x: hidden;
     // background: fixed;
 }
-.courseInfo{
-    margin-top:5em;
-    margin-bottom: 0em;
-    // width: 100%;
-    // height: 100%;
-    // padding: 0%;
-}
+// .courseInfo{
+//     margin-top:5em;
+//     margin-bottom: 0em;
+//     width: 100%;
+//     height: 100%;
+//     padding: 0%;
+// }
 h1,h2,h4{
     font-weight: bold;
     font-family:"Times New Roman";
     // float:left;
     // margin-left: 2em;
-    color:darkmagenta;
+    color:darkcyan;
     // display: block;
     
 }
@@ -117,29 +126,32 @@ hr{
     height:2em;
 }
 .image{
-width: 50%;
-height: 70%;
-//   margin-left: 60%;
-//   margin-top: 18%;
-//   float: right;
-padding: 0%;
+    width: 70%;
+    height: 100%;
+    padding: 0%;
+    margin: 0%;
 }
 .pp{
     display: block;
+    text-decoration: none;
+    color: black;
+}
+.pp:hover{
+    color:darkblue;
 }
 .pdfs,.videos,.questions{
-        text-align: left;
-        margin-left:5em;
-        // overflow-y:hidden;
-    }
+    text-align: left;
+    margin-left:5em;
+    // overflow-y:hidden;
+}
 .question{
     border-style:outset ;
     border-radius: 2em;
     width:90%;
     margin-left: 5%;
     margin-top: 2em;
+    border-color: darkblue;
 }
-
 .routerQ{
     text-decoration: none;
     width:90%;
@@ -188,17 +200,24 @@ button:hover {
     color:black;
 }
 span{
-    color: darkmagenta;
+    color: darkcyan;
 }
 .syllabus{
     color:black;
-    margin-left:40%;
+    margin-left:5%;
+    
 
 }
 .LearnersQuestion{
     color: black;
     margin-left: 2em;
     margin-top: 2%;
+}
+.videoName{
+    float:left;
+}
+h5{
+    margin-bottom: 2%;
 }
 </style>
 <script>
@@ -220,8 +239,8 @@ export default {
         this.$store.dispatch("Course/getCoursePdfs", this.$route.params.CourseID);
         this.$store.dispatch("Course/getCourseQuestions", this.$route.params.CourseID);
         // console.log("in vue course:",this.coursePdfs.data.length);
-        this.PdfLength=this.coursePdfs.data.length;
-        this.VideoLength=this.courseVideos.data.length;
+        // this.PdfLength=this.coursePdfs.data.length;
+        // this.VideoLength=this.courseVideos.data.length;
         console.log("in vue PdfLength:",this.PdfLength);
         console.log("UserID",this.UserID);
 

@@ -1,14 +1,20 @@
 <template>
    <div class="conatiner parent px-0">
       <div class="row">
+        <br/><br/>
+        <router-link to="/">
+          <img class="logo" src="../assets/lo.png" alt="logo" />
+        </router-link>
+      </div>
+      <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
           <form class="login-form">
-            <h1>LogIn to your account</h1>
+            <h1>Log In to your account</h1>
             <input type="email" placeholder="Email" v-model="email" required />
             <input type="password" placeholder="Password" v-model="password" required />
             <button @click.prevent="logIn()" id="signup-btn" type="submit" testid="sign up button" class="costum-btn">
-              LogIn
+              Log In
             </button>
             <h2>Don't have an account?</h2>
           <router-link
@@ -66,6 +72,7 @@
   text-transform: uppercase;
   white-space: normal;
   float: center;
+  background-color: darkblue;
 }
 .highlight {
   color: #0f1549;
@@ -100,6 +107,13 @@
 }
 h1 {
   margin-top: 10%;
+}
+.logo{
+  width: 12%;
+  height:80px ;
+  float:left;
+  margin-left:2em;
+margin-right: 0em;
 }
 </style>
 <script>

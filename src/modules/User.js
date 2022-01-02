@@ -48,9 +48,11 @@ export default {
           user_type: "learner",
           user_id: userId
         })
-        .then(() => {
+        .then((response) => {
           commit("setL", "L");
+          console.log("hehe:",response);
           store.dispatch("User/showAllUsers"); 
+
         })
         .catch((error) => {
           console.log(error);
