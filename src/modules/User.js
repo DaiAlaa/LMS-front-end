@@ -32,6 +32,7 @@ export default {
             Users = [];
           }
           commit("setAllUsers", Users);
+          console.log(response.data)
         })
         .catch((error) => {
           let Users = [];
