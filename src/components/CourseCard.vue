@@ -12,7 +12,7 @@
       </h4>
       <br />
       <p class="cardtext">
-        {{ 'by : ' + instructor_first_name + ' ' + instructor_last_name}}
+        {{ 'by : ' + instructor_user_name}}
       </p>
       <router-link
         :to="{ path: '/CourseHome/' + courseid }"

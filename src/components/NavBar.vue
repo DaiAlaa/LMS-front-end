@@ -112,11 +112,11 @@
 }
 .logo{
   width: 12%;
-  height:60px ;
+  height:70px ;
   display: inline;
   position: absolute;
   right: 86%;
-  margin-top:0.7% ;
+  margin-top:0% ;
 }
 </style>
 <script>
