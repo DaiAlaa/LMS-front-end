@@ -75,7 +75,7 @@ export default {
   },
   filters: {
     shorten: function (value) {
-      if (value && value.length > 20) return value.substring(0, 20) + "..";
+      if (value && value.length > 17) return value.substring(0, 17) + "..";
       else return value;
     },
   },   
