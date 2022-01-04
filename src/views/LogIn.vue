@@ -11,7 +11,7 @@
         <div class="col-md-6">
           <form class="login-form">
             <h1>Log In to your account</h1>
-            <input type="text" placeholder="Email" v-model="userName" required />
+            <input type="text" placeholder="user name" v-model="userName" required />
             <input type="password" placeholder="Password" v-model="password" required />
             <button @click.prevent="logIn()" id="signup-btn" type="submit" testid="sign up button" class="costum-btn">
               Log In

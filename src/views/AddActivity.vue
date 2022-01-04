@@ -14,6 +14,9 @@
             <p v-if="empty_pdf == true" class="invalid" id="empty_pdf">
               Please choose a file
             </p>
+            <p v-if="invalid_pdf == true" class="invalid" id="empty_pdf">
+              invalid file type
+            </p>
             <button @click.prevent="addPdfs()" id="signup-btn" type="submit" testid="sign up button" class="costum-btn">
               Add PDF
             </button>
@@ -132,6 +135,7 @@ export default {
           selectedPdf:null,
           invalid_pdf_name: false,
           empty_pdf: false,
+          invalid_pdf:false,
 
         }
 
@@ -139,10 +143,10 @@ export default {
     methods: {
       onPdfUpload(event){
       this.selectedPdf = event.target.files[0];
+      
     },
       addPdfs(){
-
-        if(this.course_pdf_name == "" || this.selectedPdf == null){
+        if(this.course_pdf_name == "" || this.selectedPdf == null||this.selectedPdf.type!="application/pdf"){
           if(this.course_pdf_name == ""){
           this.invalid_pdf_name = true;
           }else{
@@ -154,11 +158,18 @@ export default {
           }else{
             this.empty_pdf = false;
           }
+          if(this.selectedPdf.type!="application/pdf"){
+            this.invalid_pdf=true;
+          }
+          else{
+            this.invalid_pdf=false;
+          }
+
         }
         else{
         this.invalid_pdf_name = false;
         this.empty_pdf = false;
-        console.log("act:",this.$route.params.CourseID);
+        this.invalid_pdf=false;
         let Pdf={
             SelPdf:this.selectedPdf,
             Id:this.$route.params.CourseID,

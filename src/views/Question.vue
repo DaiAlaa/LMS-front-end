@@ -108,7 +108,6 @@ export default {
     },
     methods:{
         addAnswer(){
-            // console.log("answer vue:",this.newAnswer);
             let Answer={
                 questionID:this.$route.params.QuestionID,
                 newAnswer:this.newAnswer

@@ -1,5 +1,7 @@
 # lms-frontend
 
+# link for deployed web 
+http://lms-front-end.vercel.app/ 
 ## Project setup
 ```
 npm install

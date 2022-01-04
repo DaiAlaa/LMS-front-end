@@ -197,7 +197,6 @@ export default {
             firstname:this.firstName,
             lastname:this.lastName,
           };
-          console.log("html",newuser);
           this.$store.dispatch("Authorization/signUp", newuser);
           
           // this.$router.replace("/EmailConfirmation");

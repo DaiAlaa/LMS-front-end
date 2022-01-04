@@ -43,7 +43,6 @@ export default {
     },
     actions:{
         signUp({ commit }, user) {
-          console.log("signup:",user)
           let x={
             user_name: user.username,
             email: user.email,
@@ -52,7 +51,6 @@ export default {
             birth_date: user.birthday,
             password: user.password,
           }
-          console.log(x);
             commit("auth_request");
             axios
               .post( urlRequest + "users/sign-up",{
@@ -64,10 +62,7 @@ export default {
                 password: user.password,
               })
               .then((response) => {
-                console.log("ya rab")
-                ///////////////////
                 const token = "Bearer "+response.data.token;
-                console.log(token)
                 localStorage.setItem("X-token", token);
                 localStorage.setItem("Authorization", token);
                 axios.defaults.headers.common["Authorization"] = token;
@@ -81,7 +76,6 @@ export default {
           },
           logIn({ commit }, user) {
             commit("auth_request");
-            console.log(user);
             axios
               .post( urlRequest + "users/login", {
                 user_name: user.userName,
@@ -90,7 +84,6 @@ export default {
               .then((response) => {
                 const token = "Bearer "+response.data.token;
                 localStorage.setItem("Authorization", token);
-                console.log("hehe",response.data)
                 axios.defaults.headers.common["Authorization"] = token;
                 store.dispatch("Authorization/get_user", true);
               })
@@ -103,13 +96,11 @@ export default {
           get_user({ commit }, flag) {
             const token = localStorage.getItem("Authorization");
             axios.defaults.headers.common["Authorization"] = token;
-            console.log("getuser token:",axios.defaults.headers.common["Authorization"]);
             commit("auth_request");
             axios
               .get(urlRequest + "users")
               .then(response => {
                 const user = response.data.data;
-                console.log("getuser: ",user);
                 commit("auth_success", { token, user });
                 if (flag) router.replace("/");
               })

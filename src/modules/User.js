@@ -32,7 +32,6 @@ export default {
             Users = [];
           }
           commit("setAllUsers", Users);
-          console.log(response.data)
         })
         .catch((error) => {
           let Users = [];
@@ -42,7 +41,6 @@ export default {
     },
 
     elevateLearner({ commit },userId) {
-      console.log(userId)
       axios
         .put(urlRequest + "users/change_role?user_type=learner&user_id="+userId,{
           user_type: "learner",
@@ -50,7 +48,7 @@ export default {
         })
         .then((response) => {
           commit("setL", "L");
-          console.log("hehe:",response);
+          console.log(response);
           store.dispatch("User/showAllUsers"); 
 
         })
@@ -59,7 +57,6 @@ export default {
         });
     },
     EditUser({ commit, state }, user) {
-      console.log("edit")
         axios
         .put(urlRequest + "users", {
           user_name: user.userName,

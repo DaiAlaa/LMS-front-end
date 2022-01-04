@@ -170,7 +170,6 @@ export default {
               }else{
                 this.invalid_syll = false;
               }
-              console.log("empty")
             }
             else{
               this.invalid_name = false;
@@ -179,7 +178,6 @@ export default {
                   course_name: this.course_name,
                   course_syllabse: this.course_syllabse,
                 };
-                console.log(new_course);
                 this.$store.dispatch("Course/addNewCourse", new_course);
             }
 

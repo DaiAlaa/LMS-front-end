@@ -26,15 +26,12 @@ export default {
     },
     setCourse(state,Course){
       state.Course=Course;
-      console.log("course id:",Course.id);
     },
     setCourseVideoes(state,Videos){
       state.Videos=Videos;
     },
     setCoursePdfs(state,Pdfs){
       state.Pdfs=Pdfs;
-      // console.log(Pdfs);
-      // console.log(state.Pdfs);
     },
     setCourseName(state,courseName){
       state.courseName=courseName;
@@ -78,13 +75,11 @@ export default {
       .then((response) => {
         ///////////////////response should return course id
         let course_data = response.data.data;
-        console.log("ha",response);
-        console.log("in r course:",course_data);        // route to this new course page with the id
+       // route to this new course page with the id
         commit("setNewCourseID", course_data.id);
         router.replace("/CourseHome/"+course_data.id);
       })
       .catch((error) => {
-        console.log("ha2")
         console.log(error);
       });
     },
@@ -98,7 +93,6 @@ export default {
       .then((response) => {
         ///////////////////response should return course id
         let course_data = response.data;
-        console.log(course_data);
         // route to this new course page with the id
         // commit("mutation name", par_name);
       })
@@ -117,7 +111,6 @@ export default {
       .then((response) => {
         ///////////////////response should return course id
         let course_data = response.data;
-        console.log(course_data);
         // route to this new course page with the id
         // commit("mutation name", par_name);
       })
@@ -134,7 +127,6 @@ export default {
             Users = [];
           }
           commit("setAllUsers", Users);
-          console.log(response);
         })
         .catch((error) => {
           let Users = [];
@@ -153,14 +145,11 @@ export default {
         });
     },
     getCourse({commit},id){
-      console.log(id);
       axios
       .get(urlRequest + "courses/?id="+id)
       .then((response) => {
         let Course = response.data.data;
-        console.log("responsejs:",Course);
         commit("setCourse", Course);
-        console.log("courseName: ",Course[0].name);
         commit("setCourseName",Course[0].name);
         // commit(,Course.);
         // commit(,Course.);
@@ -170,7 +159,7 @@ export default {
       .catch((error) => {
         let Course = {};
         commit("setCourse", Course);
-        console.log(error,"hehehe");
+        console.log(error);
       });
     },
     getCourseVideos({commit},id){
@@ -178,7 +167,6 @@ export default {
       .get(urlRequest+"materials/materials_for_specific_course_of_specific_type?course_id="+id+"&material_type=video")
       .then((response)=>{
         let Videos=response.data.data;
-        console.log("videos:",response.data);
         commit ("setCourseVideoes",Videos);
       })
       .catch((error)=>{
@@ -192,7 +180,6 @@ export default {
       .get(urlRequest+"materials/materials_for_specific_course_of_specific_type?course_id="+id+"&material_type=file")
       .then((response)=>{
         let Pdfs=response.data;
-        console.log("pdfs:",Pdfs);
         commit ("setCoursePdfs",Pdfs);
       })
       .catch((error)=>{
@@ -202,12 +189,10 @@ export default {
       });
     },
     getCourseQuestions({commit},id){
-      console.log("getCourses id:",id);
       axios.
       get(urlRequest+"qa/course?course_id="+id)
       .then((response)=>{
         let Questions=response.data;
-        console.log("questions",Questions);
         commit("setCourseQuestions",Questions);
       })
       .catch((error)=>{
@@ -217,12 +202,10 @@ export default {
       });
     },
     getAQuestion({commit},QuestionID){
-      console.log(QuestionID);
       axios
       .get(urlRequest+"qa?id="+QuestionID)
       .then((response)=>{
         let Question=response.data;
-        console.log("question",Question);
         commit("setAQuestion",Question);
       })
       .catch((error)=>{
@@ -238,14 +221,12 @@ export default {
       file.append("course_id",Pdf.Id);
       file.append("name",Pdf.name);
       file.append("material_type","file");
-      console.log("file",Pdf.Id)
       axios({
         method:"post",
         url:urlRequest+"materials/create-file",
         data:file
       })
       .then(()=>{
-        console.log("hehehe");
         commit ("successfulAdditionFile");
         router.replace("/CourseHome/"+Pdf.Id);
 
@@ -273,8 +254,6 @@ export default {
       })
       .then((response)=>{
         commit("");
-        console.log(response);
-        console.log("addQ:",Question.id)
         store.dispatch("Course/getCourseQuestions",Question.id);
       })
       .catch((error)=>{
@@ -282,7 +261,6 @@ export default {
       });
     },
     addAnswer({commit},Answer){
-      console.log("answer:",Answer.newAnswer);
       axios
       .post(urlRequest+"qa/reply",{
         qa_id:Answer.questionID,

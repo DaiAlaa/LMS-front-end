@@ -44,7 +44,7 @@
             </div> -->
 
             <router-link :to="{path: '/addactivity/'+this.course[0].id}">
-                <button v-if="this.UserType=='admin' || this.UserID==this.course[0].instructor_id">Add PDF</button>
+                <button v-if="this.UserID==this.course[0].instructor_id">Add PDF</button>
             </router-link>
                 
         </div>
@@ -71,7 +71,7 @@
                 <!-- another way display videos from youtube  it takes embed url only  -->
                 <!-- <iframe  width="420" height="315" src="https://www.youtube.com/embed/AAbUfZD_09s"></iframe> -->
                 <router-link :to="{path: '/addactivityvid/'+this.course[0].id}">
-                    <button  v-if="this.UserType=='admin' || this.UserID==this.course[0].instructor_id">Add Video</button>
+                    <button  v-if="this.UserID==this.course[0].instructor_id">Add Video</button>
                 </router-link>
                 
         </div>
@@ -252,11 +252,6 @@ export default {
         this.$store.dispatch("Course/getCourseVideos", this.$route.params.CourseID);
         this.$store.dispatch("Course/getCoursePdfs", this.$route.params.CourseID);
         this.$store.dispatch("Course/getCourseQuestions", this.$route.params.CourseID);
-        console.log("in vue course:",this.courseVideos.length);
-        // this.PdfLength=this.coursePdfs.data.length;
-        // this.VideoLength=this.courseVideos.data.length;
-        console.log("in vue PdfLength:",this.PdfLength);
-        console.log("UserID",this.UserID);
 
     },
     methods:{
