@@ -84,7 +84,7 @@ export default {
             console.log(user);
             axios
               .post( urlRequest + "users/login", {
-                email: user.email,
+                user_name: user.userName,
                 password: user.password,
               })
               .then((response) => {

@@ -11,7 +11,7 @@
         <div class="col-md-6">
           <form class="login-form">
             <h1>Log In to your account</h1>
-            <input type="email" placeholder="Email" v-model="email" required />
+            <input type="text" placeholder="Email" v-model="userName" required />
             <input type="password" placeholder="Password" v-model="password" required />
             <button @click.prevent="logIn()" id="signup-btn" type="submit" testid="sign up button" class="costum-btn">
               Log In
@@ -124,7 +124,7 @@ export default {
     data: function () {
       return {
         //User's data that will be passed from the v-model
-        email: "",
+        userName: "",
         password: "",
         //required for validation
         trigger_validation: false,
@@ -140,7 +140,7 @@ export default {
         setTimeout(() => {
           if (this.can_submit) {
             let user = {
-              email: this.email,
+              userName: this.userName,
               password: this.password,
             };
             this.$store.dispatch("Authorization/logIn", user);
