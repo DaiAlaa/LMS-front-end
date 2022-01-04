@@ -92,9 +92,10 @@ export default {
      })
       .then((response) => {
         ///////////////////response should return course id
-        let course_data = response.data;
+        // let course_data = response.data;
         // route to this new course page with the id
         // commit("mutation name", par_name);
+        console.log(response);
       })
       .catch((error) => {
         console.log(error);
@@ -110,9 +111,10 @@ export default {
       })
       .then((response) => {
         ///////////////////response should return course id
-        let course_data = response.data;
+        // let course_data = response.data;
         // route to this new course page with the id
         // commit("mutation name", par_name);
+        console.log(response);
       })
       .catch((error) => {
         console.log(error);
@@ -254,6 +256,7 @@ export default {
       })
       .then((response)=>{
         commit("");
+        console.log(response);
         store.dispatch("Course/getCourseQuestions",Question.id);
       })
       .catch((error)=>{

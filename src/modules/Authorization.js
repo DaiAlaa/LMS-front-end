@@ -43,14 +43,6 @@ export default {
     },
     actions:{
         signUp({ commit }, user) {
-          let x={
-            user_name: user.username,
-            email: user.email,
-            first_name:user.firstname,
-            last_name:user.lastname,
-            birth_date: user.birthday,
-            password: user.password,
-          }
             commit("auth_request");
             axios
               .post( urlRequest + "users/sign-up",{
