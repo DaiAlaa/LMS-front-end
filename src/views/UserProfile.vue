@@ -195,8 +195,7 @@ export default {
       this.submit = this.submit && true;
     },
     reqEmail() {
-      var to_check = this.Email;
-      console.log("check", this.Email)
+      // var to_check = this.Email;
       if (
         this.Email == "" 
         // ||
@@ -205,9 +204,7 @@ export default {
         // to_check.indexOf(".com") == -1 ||
         // to_check.indexOf(".com") + 4 != to_check.length
       ) {
-        console.log("to_check", to_check)
         this.cannotSubmit();
-        console.log("reqEmail no");
         return true;
       } else {
         this.canSubmit();
@@ -215,7 +212,6 @@ export default {
       }
     },
     shortPassword() {
-      console.log("password")
           if (/*this.password.length <= 7 && ! */this.password == "") {
             this.cannotSubmit();
             return true;
@@ -229,7 +225,6 @@ export default {
       this.submit = true;
       this.reqEmail();
       this.shortPassword();
-      console.log("this.submit" , this.submit);
       setTimeout(() => {
         if (this.submit) {
           let newuser = {

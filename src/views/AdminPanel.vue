@@ -217,7 +217,6 @@ export default {
     },
   mounted() {
     this.$store.dispatch("User/showAllUsers");
-    console.log(this.AllUsers)
   },
   computed: {
     ...mapGetters({

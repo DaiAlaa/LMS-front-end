@@ -164,7 +164,6 @@ export default {
         this.invalid_video_link = false;
         this.invalid_video_name = false;
         this.empty_video_link = false
-        console.log("act:",this.$route.params.CourseID);
         let Video={
             link:this.course_video_link,
             courseID:this.$route.params.CourseID,
