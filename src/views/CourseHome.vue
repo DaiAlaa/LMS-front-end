@@ -15,6 +15,9 @@
                 <h2 class="instructorName">
                  <span>by: </span> {{this.course[0].instructor_user_name}}
                 </h2> 
+                <h2 class="instructorName">
+                 <span>Instructor mail: </span> {{this.course[0].instructor_email}}
+                </h2> 
             </div>
             <div class="col-sm-1"></div>
             <div class="col-sm-6">
