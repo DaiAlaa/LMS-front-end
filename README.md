@@ -1,4 +1,5 @@
-# lms-frontend
+# learning manegment system-frontend 👨‍🏫
+It's a learing website that helps students to enroll their courses, watch the lectures, ask any questions and get answers
 
 # link for deployed web 
 http://lms-front-end.vercel.app/ 
@@ -29,3 +30,10 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Technologies and tools
+- VueJs
+- HTML
+- CSS
+- JS
+- Axios
