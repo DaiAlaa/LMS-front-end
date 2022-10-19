@@ -1,5 +1,5 @@
 # learning manegment system-frontend 👨‍🏫
-It's a learNing website that helps students to enrol their courses, watch the lectures, ask any questions and get answers
+It's a learning website that helps students to enrol their courses, watch the lectures, ask any questions and get answers
 
 # link for deployed web 
 http://lms-front-end.vercel.app/ 
